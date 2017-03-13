@@ -1,6 +1,7 @@
 #Open Data Advocacy
 
 ##Resources
+- The Sunlight Foundation has an incredible [Public Policy for Public Data](http://whatworkscities.sunlightfoundation.com/) guide for advocating for better governmental policies.
 - EDGI has [primers on several of the agencies](https://envirodatagov.org/agencyprimers/) that are vulnerable to change and loss. These may be instructive when contacting officials.
 
 ##Issues
