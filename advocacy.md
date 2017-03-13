@@ -12,4 +12,4 @@
 - There is currently no registry for officer-involved shootings or citizens killed by police.
 - [EPA climate change data is potentially threatened](http://www.reuters.com/article/us-usa-trump-epa-climatechange-idUSKBN15906G)
 - [USDA animal welfare data](http://www.sciencemag.org/news/2017/02/trump-administration-blacks-out-animal-welfare-information) has been removed
-- **Don't forget to check for state and local data**. Many states and local government provide data on things like complaints about police, traffic stops, budgets, and other information. If you would like to see more from your state and local governments...let them know!
+- **Don't forget to check for state and local data**. Many states and local government provide data on things like complaints about police, traffic stops, budgets, and other information. If you would like to see more from your state and local governments...let them know! [Public Policy for Public Data](http://whatworkscities.sunlightfoundation.com/#section-h2-09) has examples of successful local policies.
