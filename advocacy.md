@@ -5,6 +5,11 @@
 - The Sunlight Foundation has an incredible [Public Policy for Public Data](http://whatworkscities.sunlightfoundation.com/) guide for advocating for better governmental policies.
 - EDGI has [primers on several of the agencies](https://envirodatagov.org/agencyprimers/) that are vulnerable to change and loss. These may be instructive when contacting officials.
 
+## Tips
+- Be clear about **why** open data and data accessibility is important to you.
+- Include ways in which accessible data is beneficial to federal, state, and local governments.
+- Cite [specific policies and specific outcomes](http://assets.sunlightfoundation.com.s3.amazonaws.com/documents/policy/impacts-of-open-data.pdf) that have been beneficial in other places.
+
 ## Issues
 - [H.R. 1305 - American Community Survey Act](https://www.congress.gov/bill/115th-congress/house-bill/1305) Would likely undercount minority populations in federal databases
 - [S.2852 - OPEN Government Data Act](https://www.congress.gov/bill/114th-congress/senate-bill/2852) passed the Senate last year, but [H.R. 5051 - OPEN Government Data Act](https://www.congress.gov/bill/114th-congress/house-bill/5051/) stalled in the house
