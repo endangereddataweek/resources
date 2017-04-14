@@ -9,5 +9,5 @@
 - [Workshop using endangered data](https://github.com/endangereddataweek/resources/blob/master/endangereddataworkshop.md)
 - [DataRescue event](http://www.ppehlab.org/datarescue)
 - [Letter writing/advocacy campaign](https://github.com/endangereddataweek/resources/blob/master/advocacy.md)
-- [Postcards to advocate for open data policies](https://github.com/endangereddataweek/resources/blob/master/media/Endangered%20Data%20postcards.pdf) (artist: marco seiferle-valencia CC0)
+- [Postcards to advocate for open data policies](https://github.com/endangereddataweek/resources/postcards) 
 
