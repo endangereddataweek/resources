@@ -4,7 +4,7 @@
 - [*Trump's Quiet War on Data*](https://www.engadget.com/2017/03/20/trumps-quiet-war-on-data-begins) provides good background reading on some of the threats to publicly available data, including the impact of budget cuts and data infrastructure neglect.
 - The Sunlight Foundation has an incredible [Public Policy for Public Data](http://whatworkscities.sunlightfoundation.com/) guide for advocating for better governmental policies.
 - EDGI has [primers on several of the agencies](https://envirodatagov.org/agencyprimers/) that are vulnerable to change and loss. These may be instructive when contacting officials.
-- [Postcards to advocate for open data policies](https://github.com/endangereddataweek/resources/postcards)
+- [Postcards to advocate for open data policies](https://github.com/endangereddataweek/resources/tree/master/media/postcards)
 
 ## Tips
 - Be clear about **why** open data and data accessibility is important to you.
