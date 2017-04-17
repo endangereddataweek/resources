@@ -13,7 +13,8 @@
 
 ## Issues
 - [H.R. 1305 - American Community Survey Act](https://www.congress.gov/bill/115th-congress/house-bill/1305) Would likely undercount minority populations in federal databases
-- [S.2852 - OPEN Government Data Act](https://www.congress.gov/bill/114th-congress/senate-bill/2852) passed the Senate last year, but [H.R. 5051 - OPEN Government Data Act](https://www.congress.gov/bill/114th-congress/house-bill/5051/) stalled in the house
+- Call or write representatives asking them to support the bi-partisan OPEN Government Data Act ([S.760](https://www.congress.gov/bill/115th-congress/senate-bill/760?q=%7B%22search%22%3A%5B%22OPEN+government+act%22%5D%7D&r=2) and H.R.1770(https://www.congress.gov/bill/115th-congress/house-bill/1770?q=%7B%22search%22%3A%5B%22OPEN+government+act%22%5D%7D&r=1)
+-Call or write House Reps asking them to support the Make State Governments More Open, Honest, and Transparent Act of 2017 [H.R.554](https://www.congress.gov/bill/115th-congress/house-bill/554?q=%7B%22search%22%3A%5B%22OPEN+government+act%22%5D%7D&r=3)
 - [Senate bill S.103](https://www.congress.gov/bill/115th-congress/senate-bill/103/text) and [House bill H.R.482](https://www.congress.gov/bill/115th-congress/house-bill/482/text) would prohibit funding from being used "to design, build, maintain, utilize, or provide access to a Federal database of geospatial information on community racial disparities or disparities in access to affordable housing."
 - Local law enforcement are not required to report hate crimes to federal law enforcement | [*Patchy reporting undercuts national hate crimes count*](http://bigstory.ap.org/article/8247a1d2f76b4baea2a121186dedf768/ap-patchy-reporting-undercuts-national-hate-crimes-count) | [SPLC's *#ReportHate*](https://www.splcenter.org/reporthate)
 - There is currently no registry for officer-involved shootings or citizens killed by police.
