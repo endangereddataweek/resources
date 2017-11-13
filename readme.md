@@ -2,7 +2,9 @@
 
 ## Promotional Materials
 
-- [EDW logo and die cut sticker files](https://github.com/endangereddataweek/resources/tree/master/media)
+- [EDW logo tiled background design](https://github.com/endangereddataweek/resources/tree/master/media/designelements)
+- [Save the Date postcards](https://github.com/endangereddataweek/resources/tree/master/media/savethedate2018-postcards)
+- [Print your own stickers](https://github.com/endangereddataweek/resources/tree/master/media/logo-stickers)
 
 ## Resources for events
 (in development)
