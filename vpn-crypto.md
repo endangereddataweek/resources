@@ -1,3 +1,4 @@
+*compiled by Jason Heppler*
 
 ## Resources
 
