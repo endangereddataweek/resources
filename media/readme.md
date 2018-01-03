@@ -1,1 +1,1 @@
-All logos and design elements are CC-0
+All materials in the media directory are CC-0.
