@@ -1,3 +1,5 @@
+*compiled by Brandon Locke CC-BY*
+
 # Open Data Advocacy
 
 ## Resources
