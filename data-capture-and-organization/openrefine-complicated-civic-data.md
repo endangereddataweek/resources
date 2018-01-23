@@ -1,4 +1,6 @@
 # OpenRefine for Complicated Civic Data
+Written by Brandon Locke (CC-BY)
+*this is a draft version - if you see any mistakes or improvements, please do not hesitate to file an issue*
 
 ## Civic Data
 
