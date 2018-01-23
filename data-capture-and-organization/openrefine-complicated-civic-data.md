@@ -3,7 +3,7 @@
 Written by Brandon T. Locke (CC-BY)
 
 *this is a draft version - if you see any mistakes or improvements, please do not hesitate to file an issue*
-
+## Overview 
 ### Civic Data
 
 It is quite common for civic data to be shared in formats that are confusing, ill-formed, or incomplete. There are many reasons for this, including the quirks of their (often proprietary) software, language and coding that may be unfamiliar to people outside of the organization, and that open data is most often an unfunded mandate.
@@ -67,7 +67,7 @@ Based on the regular use of YYYY as opposed to YY, we can easily filter these ou
 - Type `toString(toDate(value),"YY/MM/dd")` This will convert the value from a string format to a date format, rearrange it to the format we want, and then convert it back to a string, so that it matches the rest of our dates. 
 - Click OK to make the changes and return to the data screen
 - On the left side, click 'remove all' to remove the filter and check the data visible in open refine.
-- Go back to the 'Date' column, and Transform again. Then type `"20"+value`
+- Go back to the 'Date' column, and Transform again. Then type `"20"+value` to make all dates YYYY/MM/dd
 - Let's format the date so that it's a string that matches the ISO 8601 format. Click on the triangle by 'Date,' then 'Transform,' and type `value.replace("/","-")`. This will take all `/`s and replace them with `-`s.
 
 ### Separate the Time of the Stop
@@ -80,6 +80,7 @@ The 'Time' column includes the incorrect date and the correct time, with a T in-
 ### Append Correct Date with Time
 - Click Date > Edit column > Add column based on this column.
 - Type in `cells["Date"].value + "T" + cells["Time 2"].value` and name it "DateTime"
+- You should now have the dates in ISO 8601 format, but since it's still on a 12 hr clock, many of the times are incorrect.
 
 ### Converting 12 hr time to 24 hr time
 This dataset has a column with am/pm and a time format that is meant for a 24 hr clock. To correct this, we'll need to facet out all of the PM times and then add 12 to the hours. Before we do this, we do have one other small, but important step. With the 24 hr format, something that happens just after midnight will look like it happened just after noon. We'll need to do a special change to convert 12:xx AM to 00:xx AM. We'll also have an issue with things happening just after noon appearing to happen at 24:xx PM.
@@ -90,28 +91,30 @@ To convert all 12:xx to 00:xx:
 
 - Type `value.replace("T12", "T00")`, then click OK.
 
-Right now, Open Refine sees the 'DateTime' column as a string, not a date. Open Refine has a built-in feature to alter data that it recognizes as dates, but before we do that, we have to make a quick adjustment. We'll need to remove the Z at the end of the time — OpenRefine will adjust the time if the Z is there. (Z is intended to signify that this is UTC - though there's no indication that this is correct - it's much more likely to be in Eastern Standard/Daylight time.
+Right now, Open Refine sees the 'DateTime' column as a string, not a date. Open Refine has a built-in feature to alter data that it recognizes as dates, but before we do that, we have to make a quick adjustment. We'll need to remove the Z at the end of the time — OpenRefine will adjust the time if the Z is there. (Z is intended to signify that this is UTC - though there's no indication that this is correct - it's much more likely to be in Eastern Standard/Daylight time.)
 
-- Click on Datetime > Edit Cells > Transform
+- Click on DateTime > Edit Cells > Transform
 - Type in `value.replace("Z","")` to replace all instances of 'Z' with nothing. Then click OK
-- Click on DateTime > Edit Cells > Common transforms > To date' This should successfully transform all 6187 rows, and the data should appear green now.
+- Click on DateTime > Edit Cells > Common transforms > To date. This should successfully transform all 6187 rows, and the data should appear green now.
 
 Now that this is fixed, we can filter out the PM dates to work with:
 
 - Click on AM_PM > Text filter
 - Type in 'PM'. We should see only PM records on the screen
 - Click on DateTime > Edit cells > Transform
-- In the GREL window, type: `value.inc(12,'hours')` This [function](https://github.com/OpenRefine/OpenRefine/wiki/GREL-Date-Functions#incdate-d-number-value-string-unit) will understand properly formatted dates and allow transformations
+- In the GREL window, type: `value.inc(12,'hours')` This [function](https://github.com/OpenRefine/OpenRefine/wiki/GREL-Date-Functions#incdate-d-number-value-string-unit) will understand properly formatted dates and allow us to add 12 hours to every time.
 - Click 'Remove All' to clear the filter
 
 Double-check DateTime against the original times and dates to make sure that we've done this correctly. If so, we can remove 'AM_PM,' 'Time 2,', and 'Date.' 
+
+One note: This time is still technically incorrect. These are all in local time, though the use of Z indicates that it's in UTC.
 
 ### Saving and Exporting
 In the top right corner, you can click on 'Export' and save the data in a number of different formats, including csv and HTML tables.
 
 You may also want to export the entire project. This is useful if you want to share the project with others, or if you want to continue working on a different machine. It's also useful for transparency and documentation, as every change you've made is documented (and reversible).
 
-## Burlington Datset
+## Burlington, VT Datset
 
 ### Loading the Dataset
 
@@ -119,7 +122,7 @@ You may also want to export the entire project. This is useful if you want to sh
 - Open OpenRefine - it should open a window in your default web browser (if it's already open, you can click 'Open' at the top to start a new project)
 - Click 'Browse' and locate the Burlington CSV on your hard drive. Then click 'Next.'
 - The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
-- The data will appear somewhat correctly, but there are blank rows between each row with data, and you can also see that the 'Accident' header isn't appearing quite right. There's a slight issue with the default encoding that will cause some serious problems later on. The dataset is encoded in [UTF-16LE](https://en.wikipedia.org/wiki/UTF-16#UTF-16LE) 
+- The data will appear somewhat correctly, but there are blank rows between each row with data, and you can also see that the 'Accident' header isn't appearing quite right. There's a slight issue with the default encoding that will cause some serious problems later on. The dataset is encoded in [UTF-16LE](https://en.wikipedia.org/wiki/UTF-16#UTF-16LE), but it's being interpreted as UTF-16. 
 - Click on the open field next to 'Character encoding' - this will open up a pop-up window. Click on UTF-16LE.
 
 It's also worth pointing out that the file is a `.csv`, but OpenRefine has checked the file and determined that columns are separated by tabs. If you open the file in a text editor, you can see that  the data is, in fact, separated by tabs even though it's a CSV.
@@ -145,7 +148,7 @@ This tool won't work on any times that are 12:xx PM, so we'll need to make a qui
 - Enter `value.replace(" 12:"," 00:")` - this will change all times starting with 12 to 00. The inclusion of the space and colon ensures that no months, minutes, or seconds are impacted. Click OK. This should work on 170 cells.
 - On the left side, click 'Remove All' to remove the text filter and bring back both AM and PM rows.
 - Click Date Issued > Edit cells > Common Transforms > To Date - this will convert all of the dates into a standard [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
-- You can spot-check Date Issued with Date_Issued_original to make sure everything is correct. Record #36 takes place at 12:47 PM, and you can see that the conversion worked for those cells we edited.
+- You can spot-check Date Issued with orig_Date_Issued to make sure everything is correct. Record #36 takes place at 12:47 PM, and you can see that the conversion worked for those cells we edited.
 
 ### Geocoding
 This dataset has the locations of each traffic stop in it, but for many mapping platforms, knowing the street address isn't enough. Luckily, OpenRefine can use Geolocation APIs to find a latitude and longitude for addresses - even if they're just cross-street descriptions like the ones most commonly used in this dataset.
@@ -162,24 +165,24 @@ Since there's a limit of 2,500 requests per day and the API takes a bit of time,
 - Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
 - The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
 - Click geocodingResponse > Edit Column > Add Column based on this column
-- Enter `with(value.parseJson().results[0].geometry.location, pair, pair.lat +", " + pair.lng)` and call the new column 'latlng.' Hit OK.
+- Enter `with(value.parseJson().results[0].geometry.location, pair, pair.lat +", " + pair.lng)` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
 - You can delete the 'geocodingResponse' column after you have already extracted the lat/lng coordinates.
 
 #### Full Development 
 *Note: this will take an hour or two to process fully, so it's a good idea to set it up to run overnight*
 
 - Get a MapQuest API Key from the [MapQuest Developer Site](https://developer.mapquest.com/) - click the 'Get your Free API Key' button on the front page and fill out the information.
-- Once you have an API key, Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `'http://open.mapquestapi.com/nominatim/v1/search.php?' + 'key=*YOUR KEY*&' + 'format=json&' + 'q=' + escape(value, 'url')`
+- Once you have an API key, Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `'http://open.mapquestapi.com/nominatim/v1/search.php?' + 'key=*YOUR KEY*&' + 'format=json&' + 'q=' + escape(value, 'url')` **Note: be sure to add your own API key in the above expression where it says `*YOUR KEY*`**
 - Name the column 'geocodingResponse' and click OK. This will take quite some time to finish.
 - The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
 - Click geocodingResponse > Edit Column > Add Column based on this column
-- Enter `with(value.parseJson().resourceSets[0].resources[0].point.coordinates, pair, pair[0] +", " + pair[1])` and call the new column 'latlng.' Hit OK.
-- You should see that the resulting column has the lattitude and longitude for the address or cross streets. Click 'Remove All' on the text facet window to view all 5088 rows again.
+- Enter `with(value.parseJson().resourceSets[0].resources[0].point.coordinates, pair, pair[0] +", " + pair[1])` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
+- You should see that the resulting column has the lattitude and longitude for the address or cross streets.
 
 ### Correcting Typos and Merging Groups
-One of the most tedious parts of data cleaning is finding the typos and mistakes data, and similarly, finding multiple terms that are essentially the same or are intended to be the same, and merging them together.
+One of the most tedious parts of data cleaning is finding the typos and mistakes in the data, and similarly, finding multiple terms that are essentially the same or are intended to be the same, and merging them together.
 
-One good way to find typos or categories you can collapse is by doing text facets that show you the composition of the column.
+One good way to find typos or categories you can collapse is by doing text facets that show you the composition of the column. *You can find more information about the clustering algorithms in the [OpenRefine wiki](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).*
 
 - Click on City > Facet > Text Facet. You should see a number of terms that can probably be collapsed and altered, such as Burlignton > Burlington, Burlington VT > Burlington, and Essex Junction > Essex Jct.
 - Click on the `x` to close the City facet.
