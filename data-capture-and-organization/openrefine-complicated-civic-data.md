@@ -8,7 +8,7 @@ Both of the following datasets come from the [Police Data Initiative](https://ww
 
 This tutorial will provide instruction on normalizing, correcting, and restructuring, and combining two datasets from the initiative using OpenRefine.
 
-The both datasets can be downloaded @@@@
+[Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/openrefine-workshop-files/lansing-burlington-traffic-stops.zip).
 
 ## OpenRefine
 
@@ -191,4 +191,10 @@ One good way to find typos or categories you can collapse is by doing text facet
 In the top right corner, you can click on 'Export' and save the data in a number of different formats, including csv and HTML tables.
 
 You may also want to export the entire project. This is useful if you want to share the project with others, or if you want to continue working on a different machine. It's also useful for transparency and documentation, as every change you've made is documented (and reversible).
+
+## Additional OpenRefine Resources
+- [OpenRefine Wiki](https://github.com/OpenRefine/OpenRefine/wiki)
+- [OpenRefine Recipes](https://github.com/OpenRefine/OpenRefine/wiki/Recipes)
+- [Cleaning Data with OpenRefine](https://libjohn.github.io/openrefine/)
+- [Fetching and Parsing Data from the Web with OpenRefine](https://programminghistorian.org/lessons/fetch-and-parse-data-with-openrefine)
 
