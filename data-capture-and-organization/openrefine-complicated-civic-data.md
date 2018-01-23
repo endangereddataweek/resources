@@ -1,6 +1,7 @@
 # OpenRefine for Complicated Civic Data
+Brandont T. Locke (CC-BY)
 
-## Civic Data
+### Civic Data
 
 It is quite common for civic data to be shared in formats that are confusing, ill-formed, or incomplete. There are many reasons for this, including the quirks of their (often proprietary) software, language and coding that may be unfamiliar to people outside of the organization, and that open data is most often an unfunded mandate.
 
@@ -10,9 +11,11 @@ This tutorial will provide instruction on normalizing, correcting, and restructu
 
 [Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/openrefine-workshop-files/lansing-burlington-traffic-stops.zip).
 
-## OpenRefine
+### OpenRefine
 
-[OpenRefine](http://openrefine.org/) (formerly known as GoogleRefine), is a very popular tool for working with unorganized, non-normalized (what some may call "messy") data. OpenRefine accepts TSV, CSV, XLS/XLSX, JSON, XML, RDF as XML, and Google Data formats, though others may be used with extensions. It works by opening into your default browser window, but all of the processing takes place on your machine and your data isn't uploaded anywhere. This tutorial will demonstrate some of the most popular and powerful features of OpenRefine, including geocoding, algorithmic word normalization and correction, time and date manipulation. 
+[OpenRefine](http://openrefine.org/) (formerly known as GoogleRefine), is a very popular tool for working with unorganized, non-normalized (what some may call "messy") data. OpenRefine accepts TSV, CSV, XLS/XLSX, JSON, XML, RDF as XML, and Google Data formats, though others may be used with extensions. It works by opening into your default browser window, but all of the processing takes place on your machine and your data isn't uploaded anywhere. 
+
+**This tutorial will demonstrate some of the most popular and powerful features of OpenRefine, including geocoding using an API, algorithmic word normalization and correction, time and date manipulation.**
 
 ## Lansing, MI Traffic Stops
 
