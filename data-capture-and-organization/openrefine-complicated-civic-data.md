@@ -186,7 +186,7 @@ One good way to find typos or categories you can collapse is by doing text facet
 
 - Click on City > Facet > Text Facet. You should see a number of terms that can probably be collapsed and altered, such as Burlignton > Burlington, Burlington VT > Burlington, and Essex Junction > Essex Jct.
 - Click on the `x` to close the City facet.
-- Click on City, then 
+- Click on City > Edit Cells > Cluster and edit...
 - The first one uses the Key Collision method. Here you should be able to correct S Burlington & S. Burlington into one. Check the 'Merge?' checkbox, then click on 'Merge Selected & Re-Cluster.'
 - Change the method to 'nearest neighbor', and then set the Radius at 3.0. We'll grow this progressively higher to cast a wider net.
 - There are a number of different ways people have entered S/So/South Burlington, lets take all of those and change them to 'South Burlington'. Type in the new cell value in the right, and check the boxes that look like they should be South Burlington. Be careful not to re-cluster the South Burlingtons with Burlington. 
