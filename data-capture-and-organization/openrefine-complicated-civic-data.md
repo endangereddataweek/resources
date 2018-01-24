@@ -114,7 +114,7 @@ In the top right corner, you can click on 'Export' and save the data in a number
 
 You may also want to export the entire project. This is useful if you want to share the project with others, or if you want to continue working on a different machine. It's also useful for transparency and documentation, as every change you've made is documented (and reversible).
 
-## Burlington, VT Datset
+## Burlington, VT Dataset
 
 ### Loading the Dataset
 
@@ -122,10 +122,6 @@ You may also want to export the entire project. This is useful if you want to sh
 - Open OpenRefine - it should open a window in your default web browser (if it's already open, you can click 'Open' at the top to start a new project)
 - Click 'Browse' and locate the Burlington CSV on your hard drive. Then click 'Next.'
 - The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
-- The data will appear somewhat correctly, but there are blank rows between each row with data, and you can also see that the 'Accident' header isn't appearing quite right. There's a slight issue with the default encoding that will cause some serious problems later on. The dataset is encoded in [UTF-16LE](https://en.wikipedia.org/wiki/UTF-16#UTF-16LE), but it's being interpreted as UTF-16. 
-- Click on the open field next to 'Character encoding' - this will open up a pop-up window. Click on UTF-16LE.
-
-It's also worth pointing out that the file is a `.csv`, but OpenRefine has checked the file and determined that columns are separated by tabs. If you open the file in a text editor, you can see that  the data is, in fact, separated by tabs even though it's a CSV.
 - Click 'Create Project' in the top right corner.
 
 ### Evaluation
