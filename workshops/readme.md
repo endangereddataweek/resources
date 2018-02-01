@@ -1,4 +1,4 @@
 ### Workshops
 
-* [Data Manipulation with R]() by Jason Heppler - CC-BY
-* [Web Scraping with R]() by Jason Heppler - CC-BY
+* [Data Manipulation with R](https://github.com/endangereddataweek/resources/tree/master/workshops/data-manipulation-r) by Jason Heppler - CC-BY
+* [Web Scraping with R](https://github.com/endangereddataweek/resources/tree/master/workshops/web-scraping-r) by Jason Heppler - CC-BY
