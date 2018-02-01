@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Web Scraping with R</title>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="web-scraping-r_files/rmdshower/node_modules/shower-material/styles/screen-4x3.css">
+  <link rel="stylesheet" href="web-scraping-r_files/rmdshower/style-common.css">
+  <link rel="stylesheet" href="web-scraping-r_files/rmdshower/style-material.css">
+  
+  
+    <style type="text/css">
+   div.sourceCode { overflow-x: auto; }
+   table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+     margin: 0; padding: 0; vertical-align: baseline; border: none; }
+   table.sourceCode { width: 100%; line-height: 100%; }
+   td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+   td.sourceCode { padding-left: 5px; }
+   code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+   code > span.dt { color: #902000; } /* DataType */
+   code > span.dv { color: #40a070; } /* DecVal */
+   code > span.bn { color: #40a070; } /* BaseN */
+   code > span.fl { color: #40a070; } /* Float */
+   code > span.ch { color: #4070a0; } /* Char */
+   code > span.st { color: #4070a0; } /* String */
+   code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+   code > span.ot { color: #007020; } /* Other */
+   code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+   code > span.fu { color: #06287e; } /* Function */
+   code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+   code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+   code > span.cn { color: #880000; } /* Constant */
+   code > span.sc { color: #4070a0; } /* SpecialChar */
+   code > span.vs { color: #4070a0; } /* VerbatimString */
+   code > span.ss { color: #bb6688; } /* SpecialString */
+   code > span.im { } /* Import */
+   code > span.va { color: #19177c; } /* Variable */
+   code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+   code > span.op { color: #666666; } /* Operator */
+   code > span.bu { } /* BuiltIn */
+   code > span.ex { } /* Extension */
+   code > span.pp { color: #bc7a00; } /* Preprocessor */
+   code > span.at { color: #7d9029; } /* Attribute */
+   code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+   code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+   code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+   code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  
+            <link rel="stylesheet" href="custom.css"/>
+      
+  
+</head>
+
+<body class="shower list">
+
+  <header class="caption">
+    <h1>Web Scraping with R</h1>
+    <p>Jason Heppler</p>
+  </header>
+
+    
+  
+<section id="web-scraping-with-r" class="slide level2 title-slide">
+<h2>Web Scraping with R</h2>
+<p><img style="width: 250px; height: auto;" src="edw-logo.png"/></p>
+<p><a href="http://endangereddataweek.org" class="uri">http://endangereddataweek.org</a></p>
+<div id="attribution" style="line-height: 1.2em;">
+<p>Jason A. Heppler, PhD<br/> <span class="smaller">Digital Engagement Librarian</span> </br> <span class="smaller">Assistant Professor of History</span> </br> <span class="smaller">jasonheppler.org | <span class="citation" data-cites="jaheppler">@jaheppler</span></span></p>
+</div>
+</section>
+<section id="agenda" class="slide level2">
+<h2>Agenda</h2>
+<ul>
+<li>What web scraping is and when to do it</li>
+<li>Review of HTML and CSS</li>
+<li>Basics of R</li>
+<li>Web scraping with R</li>
+</ul>
+</section>
+<section id="rstudio-server" class="slide level2">
+<h2>RStudio Server</h2>
+<p>All passwords are <code>edw2017</code>. Usernames are listed below the link:</p>
+<p><a href="http://107.170.21.144:8787/auth-sign-in" class="uri">http://107.170.21.144:8787/auth-sign-in</a><br />
+username: tbattula</p>
+<p><a href="http://107.170.21.142:8787/auth-sign-in" class="uri">http://107.170.21.142:8787/auth-sign-in</a><br />
+username: sali</p>
+<p><a href="http://107.170.21.84:8787/auth-sign-in" class="uri">http://107.170.21.84:8787/auth-sign-in</a><br />
+username: jriley</p>
+<p><a href="http://107.170.21.90:8787/auth-sign-in" class="uri">http://107.170.21.90:8787/auth-sign-in</a><br />
+username: yohira</p>
+</section>
+<section id="what-is-web-scraping" class="slide level2">
+<h2>What is web scraping?</h2>
+<ul>
+<li>Writing a program to extract (“scrape”) data from web pages.</li>
+<li>Programatically pulling information out of HTML.</li>
+</ul>
+</section>
+<section id="why-scrape" class="slide level2">
+<h2>Why scrape?</h2>
+<ul>
+<li>A provider might <strong>show</strong> their data, but is unwilling to <strong>share</strong> it.</li>
+<li>A provider may not have the time/budget/expertise to share it in a more convenient form.</li>
+</ul>
+</section>
+<section id="keep-in-mind" class="slide level2">
+<h2>Keep in mind</h2>
+<ul>
+<li>If data is on a single page and never changes, a copy-and-paste might be faster.</li>
+<li>Check if there’s an Application Programming Interface available, which allows you to get structured data.</li>
+<li>See if someone else already wrote a script.</li>
+</ul>
+</section>
+<section id="data-is-messy" class="slide level2">
+<h2>Data is messy</h2>
+<p>We want data to be in a tidy format, where:</p>
+<ul>
+<li>rows = observations</li>
+<li>columns = attributes</li>
+</ul>
+<div id="aside">
+<p>(More on this at the workshop on Thursday.)</p>
+</div>
+</section>
+<section id="data-is-messy-1" class="slide level2">
+<h2>Data is messy</h2>
+<p>This is a convenient framework for machine and human-readable data, but data doesn’t always begin in this tidy format (especially on the web).</p>
+<ul>
+<li>A 2008 MIT study estimated that there exists <strong>154 million</strong> tables with high quality data on the web.</li>
+<li>The study also suggested that around <strong>30 million</strong> lists likewise contained high quality data.</li>
+</ul>
+<p>This talk will provide a quick overview of popular methods for acquiring info/data from the web using R.</p>
+</section>
+<section id="the-rvest-package" class="slide level2">
+<h2>The rvest package</h2>
+<p><code>rvest</code> is an R package for scraping content off the web page, and works as a wrapper for <code>xml2</code> and <code>httr</code>.</p>
+<p>All of these packages are under active development, which means they often have new functions added, old functions removed, and existing functions changed.</p>
+</section>
+<section id="html-and-css" class="slide level2">
+<h2>HTML and CSS</h2>
+<p>Web scraping means downloading the raw HTML page, pulling out the information we want, and getting it into a structure we can analyze.</p>
+<p>Web sites also use Cascading Style Sheets (CSS) to change the “look” of a website.</p>
+<p>You can see any of this code anytime by right-clicking on a webpage and selecting “View Page Source.”</p>
+</section>
+<section id="css-selectors" class="slide level2">
+<h2>CSS Selectors</h2>
+<p><code>rvest</code> uses CSS selectors to select the element(s) we want. We might want to grab a text element with an ID of “title”</p>
+<p><code>&lt;p id=&quot;title&quot;&gt;This Title&lt;/p&gt;</code></p>
+<p>Or, grab more sophisticated CSS, such as all link elements whose links end with <code>.pdf</code></p>
+<p><code>a[href$=&quot;.pdf&quot;]</code></p>
+<p><code>rvest</code> uses CSS selectors to select text and scrape.</p>
+</section>
+<section id="example" class="slide level2">
+<h2>Example</h2>
+<p><a href="https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California" class="uri">https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California</a></p>
+</section>
+<section id="inspect-elements" class="slide level2">
+<h2>Inspect elements</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rvest)
+src &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California&quot;</span>)
+node &lt;-<span class="st"> </span><span class="kw">html_node</span>(src, <span class="dt">css =</span> <span class="st">&quot;.wikitable&quot;</span>)</code></pre></div>
+<ul>
+<li><code>&quot;.wikitable&quot;</code> is a CSS selector which says: “grab nodes (aka elements) with a class of wikitable”.</li>
+<li><code>html_table()</code> converts a single <code>&lt;table&gt;</code> node to a data frame.</li>
+</ul>
+</section>
+<section id="inspect-elements-1" class="slide level2">
+<h2>Inspect elements</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rvest)
+src &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California&quot;</span>)
+node &lt;-<span class="st"> </span><span class="kw">html_node</span>(src, <span class="dt">css =</span> <span class="st">&quot;.wikitable&quot;</span>) 
+<span class="kw">html_table</span>(node)</code></pre></div>
+<pre><code>##       CERCLIS ID
+## 1   CA0001576081
+## 2   CA2170023236
+## 3   CA2890012584
+## 4   CA2890090002
+## 5   CAD980673685
+## 6   CAD009112087
+## 7   CAD065021594
+## 8   CAD980894679
+## 9   CA7170024528
+## 10  CAD980498562
+## 11  CAT000646208
+##                                                                          Name
+## 1                                                               AMCO Chemical
+## 2                                                   Alameda Naval Air Station
+## 3                              Lawrence Livermore National Laboratory (USDOE)
+## 4                                     Lawrence Livermore Lab Site 300 (USDOE)
+## 5                                                              Leviathan Mine
+## 6                                          Koppers Co., Inc. (Oroville Plant)
+## 7                                                     Louisiana-Pacific Corp.
+## 8                                                Western Pacific Railroad Co.
+## 9                                               Concord Naval Weapons Station
+## 10                                                            GBF, Inc., Dump
+## 11                                                      Liquid Gold Oil Corp.
+##                                    County
+## 1                                 Alameda
+## 2                                 Alameda
+## 3                                 Alameda
+## 4                 Alameda and San Joaquin
+## 5                                  Alpine
+## 6                                   Butte
+## 7                                   Butte
+## 8                                   Butte
+## 9                            Contra Costa
+## 10                           Contra Costa
+## 11                           Contra Costa
+##                                                                                                                                                                                                                                                                                                                                                Reason
+## 1                                                                                                                                                                                                                   Groundwater, soil, and soil gas are contaminated with chlorinated solvents and other contaminants including vinyl chloride.[3][4]
+## 2                                                                                                                                                                                                                                                                                                                                                 [1]
+## 3                                                                                                                                                                                                                                                                                                                                                 [2]
+## 4                                                                                                                                                                                                                                                                                                                                                 [3]
+## 5                                                                                                                                                                                                                                                                                                                                                 [4]
+## 6                                                                                                                                                                                                                                                                                                                                                 [5]
+## 7                                                                                                                                                                                                                                                                                                                                                 [6]
+## 8                                                                                                                                                                                                                                                                                                                                                 [7]
+## 9                                                                                                                                                                                                                                                                                                                                                 [8]
+## 10                                                                                                                                                                                                                                                                                                                                                [9]
+## 11                                                                                                                                                                                                                                                                                                                                               [10]
+##       Proposed     Listed Construction\ncompleted Partially\ndeleted
+## 1   04/30/2003 09/29/2003                     N/A                N/A
+## 2   05/10/1999 07/22/1999                     N/A                N/A
+## 3   10/15/1984 07/22/1987              08/10/2007                N/A
+## 4   07/14/1989 08/30/1990                     N/A                N/A
+## 5   10/22/1999 05/11/2000                     N/A                N/A
+## 6   09/08/1983 09/21/1984              09/04/2003                N/A
+## 7   10/15/1984 06/10/1986              10/01/1995                N/A
+## 8   10/26/1989 08/30/1990              03/31/1999                N/A
+## 9   06/24/1988 12/16/1994                     N/A                N/A
+## 10  06/24/1988        N/A                     N/A                N/A
+## 11  12/30/1982 09/08/1983              09/27/1995                N/A
+##        Deleted
+## 1          N/A
+## 2          N/A
+## 3          N/A
+## 4          N/A
+## 5          N/A
+## 6          N/A
+## 7   11/21/1996
+## 8   08/29/2001
+## 9          N/A
+## 10         N/A
+## 11  09/11/1996
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 99 rows ]</code></pre>
+</section>
+<section id="what-happened" class="slide level2">
+<h2>What happened?</h2>
+<ul>
+<li>We loaded the <code>rvest</code> package.</li>
+<li>We used the <code>read_html</code> function to read the HTML page.</li>
+<li>We used <code>html_nodes</code> function to find those parts of the page where <code>&lt;table id=&quot;wikitable&quot;&gt;</code>.</li>
+<li>We converted the results into a table view with the <code>html_table</code> function.</li>
+</ul>
+</section>
+<section id="piping-is-also-available" class="slide level2">
+<h2>Piping is also available</h2>
+<p>The tools of the <code>tidyverse</code> gives us an option to pipe (<code>%&gt;%</code>), or pass one set of information, functions, or commands, to another. Below, we</p>
+<ul>
+<li>use the <code>read_html()</code> function to read the URL</li>
+<li>then pass those results directly to our <code>html_node()</code> function</li>
+<li>then pass <em>those</em> results to the <code>html_table()</code> function</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_html</span>(<span class="st">&quot;https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">html_node</span>(<span class="st">&quot;.wikitable&quot;</span>) %&gt;%<span class="st"> </span><span class="kw">html_table</span>()</code></pre></div>
+<pre><code>##       CERCLIS ID
+## 1   CA0001576081
+## 2   CA2170023236
+## 3   CA2890012584
+## 4   CA2890090002
+## 5   CAD980673685
+## 6   CAD009112087
+## 7   CAD065021594
+## 8   CAD980894679
+## 9   CA7170024528
+## 10  CAD980498562
+## 11  CAT000646208
+##                                                                          Name
+## 1                                                               AMCO Chemical
+## 2                                                   Alameda Naval Air Station
+## 3                              Lawrence Livermore National Laboratory (USDOE)
+## 4                                     Lawrence Livermore Lab Site 300 (USDOE)
+## 5                                                              Leviathan Mine
+## 6                                          Koppers Co., Inc. (Oroville Plant)
+## 7                                                     Louisiana-Pacific Corp.
+## 8                                                Western Pacific Railroad Co.
+## 9                                               Concord Naval Weapons Station
+## 10                                                            GBF, Inc., Dump
+## 11                                                      Liquid Gold Oil Corp.
+##                                    County
+## 1                                 Alameda
+## 2                                 Alameda
+## 3                                 Alameda
+## 4                 Alameda and San Joaquin
+## 5                                  Alpine
+## 6                                   Butte
+## 7                                   Butte
+## 8                                   Butte
+## 9                            Contra Costa
+## 10                           Contra Costa
+## 11                           Contra Costa
+##                                                                                                                                                                                                                                                                                                                                                Reason
+## 1                                                                                                                                                                                                                   Groundwater, soil, and soil gas are contaminated with chlorinated solvents and other contaminants including vinyl chloride.[3][4]
+## 2                                                                                                                                                                                                                                                                                                                                                 [1]
+## 3                                                                                                                                                                                                                                                                                                                                                 [2]
+## 4                                                                                                                                                                                                                                                                                                                                                 [3]
+## 5                                                                                                                                                                                                                                                                                                                                                 [4]
+## 6                                                                                                                                                                                                                                                                                                                                                 [5]
+## 7                                                                                                                                                                                                                                                                                                                                                 [6]
+## 8                                                                                                                                                                                                                                                                                                                                                 [7]
+## 9                                                                                                                                                                                                                                                                                                                                                 [8]
+## 10                                                                                                                                                                                                                                                                                                                                                [9]
+## 11                                                                                                                                                                                                                                                                                                                                               [10]
+##       Proposed     Listed Construction\ncompleted Partially\ndeleted
+## 1   04/30/2003 09/29/2003                     N/A                N/A
+## 2   05/10/1999 07/22/1999                     N/A                N/A
+## 3   10/15/1984 07/22/1987              08/10/2007                N/A
+## 4   07/14/1989 08/30/1990                     N/A                N/A
+## 5   10/22/1999 05/11/2000                     N/A                N/A
+## 6   09/08/1983 09/21/1984              09/04/2003                N/A
+## 7   10/15/1984 06/10/1986              10/01/1995                N/A
+## 8   10/26/1989 08/30/1990              03/31/1999                N/A
+## 9   06/24/1988 12/16/1994                     N/A                N/A
+## 10  06/24/1988        N/A                     N/A                N/A
+## 11  12/30/1982 09/08/1983              09/27/1995                N/A
+##        Deleted
+## 1          N/A
+## 2          N/A
+## 3          N/A
+## 4          N/A
+## 5          N/A
+## 6          N/A
+## 7   11/21/1996
+## 8   08/29/2001
+## 9          N/A
+## 10         N/A
+## 11  09/11/1996
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 99 rows ]</code></pre>
+</section>
+<section id="scraping-tables" class="slide level2">
+<h2>Scraping Tables</h2>
+<p>HTML tables are contained within <code>&lt;table&gt;</code> tags. Using <code>html_nodes(&quot;table&quot;)</code> will find all the tables on a page. If you want a specific table, you can use a function from the <code>tidyr</code> package to select a specific table. For example, if you want the third table on the page, you would run:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)
+
+page %&gt;%
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="st">&quot;table&quot;</span>) %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="co"># We will subset the nodes using Base R</span>
+<span class="st">  </span>.[<span class="dv">3</span>]</code></pre></div>
+<p>Then use <code>html_table()</code> to convert the table to a data frame.</p>
+</section>
+<section id="another-rvest-example" class="slide level2">
+<h2>Another rvest example</h2>
+<p>Extract text with a class of <code>p1</code>.</p>
+</section>
+<section id="another-rvest-example-1" class="slide level2">
+<h2>Another rvest example</h2>
+<p>Extract text with a class of <code>p1</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page %&gt;%
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;.p1&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">html_text</span>()</code></pre></div>
+</section>
+<section id="another-rvest-example-2" class="slide level2">
+<h2>Another rvest example</h2>
+<p>Extract text tagged with <code>&lt;strong&gt;</code>.</p>
+</section>
+<section id="another-rvest-example-3" class="slide level2">
+<h2>Another rvest example</h2>
+<p>Extract text tagged with <code>&lt;strong&gt;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page %&gt;%
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;strong&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">html_text</span>()</code></pre></div>
+</section>
+<section id="another-rvest-example-4" class="slide level2">
+<h2>Another rvest example</h2>
+<p>Grab all of the paragraphs on a webpage tagged with <code>&lt;p&gt;</code>.</p>
+</section>
+<section id="another-rvest-example-5" class="slide level2">
+<h2>Another rvest example</h2>
+<p>Grab all of the paragraphs on a webpage tagged with <code>&lt;p&gt;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">page %&gt;%
+<span class="st">  </span><span class="kw">html_nodes</span>(<span class="dt">css =</span> <span class="st">&quot;p&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">html_text</span>()</code></pre></div>
+</section>
+<section id="rvest-workflow" class="slide level2">
+<h2>rvest Workflow</h2>
+<ol type="1">
+<li>Read in a web page with <code>read_html()</code></li>
+<li>Pick some portion of the page using <code>html_nodes()</code> with a CSS selector</li>
+<li>Pass the extraction to <code>html_text()</code> or <code>html_table()</code></li>
+</ol>
+</section>
+<section id="finding-the-css-selector-to-use" class="slide level2">
+<h2>Finding the CSS selector to use</h2>
+<p>Three approaches:</p>
+<ol type="1">
+<li>View page source and figure it out.</li>
+<li>Use the browser’s “Inspector” function (available in Chrome, Firefox, and Safari).</li>
+<li>Use SelectorGadget, a Javascript bookmarklet or Chrome plugin for your browser.</li>
+</ol>
+</section>
+<section id="selectorgadget" class="slide level2">
+<h2>SelectorGadget</h2>
+<p>Go to <a href="https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html" class="uri">https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html</a>, and drag the SelectorGadget link to your bookmark bar.</p>
+</section>
+<section id="selectorgadget-1" class="slide level2">
+<h2>SelectorGadget</h2>
+<ol type="1">
+<li>Click the SelectorGadget button.</li>
+<li>Hover over an element you want to select and click. It will turn green and reveal the CSS selector. Other matching elements will be colored yellow.</li>
+<li>If necessary, scroll around the document to find elements you don’t want to match and click on them.</li>
+</ol>
+</section>
+<section id="your-turn" class="slide level2">
+<h2>Your Turn</h2>
+<p>Navigate here: <a href="http://www.imdb.com/title/tt1490017/" class="uri">http://www.imdb.com/title/tt1490017/</a> and try the following:</p>
+<ul>
+<li>Grab the rating of the film. Be aware of the node selectors you’ll need for finding the rating.</li>
+<li>Create a list of the cast for the film.</li>
+<li>(Optional) Get the link for the movie poster.</li>
+</ul>
+</section>
+<section id="dont-abuse-your-power" class="slide level2">
+<h2>Don’t abuse your power</h2>
+<ul>
+<li>If you scrape a website, read the terms and conditions</li>
+<li>It’s sometimes more efficient/appropriate to find the API</li>
+<li>If a website public offers an API use that instead of scraping</li>
+</ul>
+<p><a href="http://www.wired.com/2014/01/how-to-hack-okcupid" class="uri">http://www.wired.com/2014/01/how-to-hack-okcupid</a></p>
+<p><a href="http://www.vox.com/2016/5/12/11666116/70000-okcupid-users-data-release" class="uri">http://www.vox.com/2016/5/12/11666116/70000-okcupid-users-data-release</a></p>
+</section>
+<section id="web-apis" class="slide level2">
+<h2>Web APIs</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Web_API#Server-side">Server-side Web APIs</a> (Application Programming Interfaces) are a popular way to provide easy access to data and other services.</li>
+<li>If you (the client) want data from a server, you typically need one HTTP verb – <code>GET</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(httr)
+hepplerj &lt;-<span class="st"> </span><span class="kw">GET</span>(<span class="st">&quot;https://api.github.com/users/hepplerj&quot;</span>)
+<span class="kw">content</span>(hepplerj)[<span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;company&quot;</span>)]</code></pre></div>
+<pre><code>## $name
+## [1] &quot;Jason Heppler&quot;
+## 
+## $company
+## [1] &quot;University of Nebraska at Omaha&quot;</code></pre>
+<ul>
+<li>Other HTTP verbs – <code>POST</code>, <code>PUT</code>, <code>DELETE</code></li>
+</ul>
+</section>
+<section id="requestresponse-model" class="slide level2 build">
+<h2>Request/response model</h2>
+<ul>
+<li>When you (the client) <em>requests</em> a resource from the server. The server <em>responds</em> with a bunch of additional information.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hepplerj$header[<span class="dv">1</span>:<span class="dv">3</span>]</code></pre></div>
+<pre><code>## $server
+## [1] &quot;GitHub.com&quot;
+## 
+## $date
+## [1] &quot;Mon, 17 Apr 2017 19:07:18 GMT&quot;
+## 
+## $`content-type`
+## [1] &quot;application/json; charset=utf-8&quot;</code></pre>
+<ul>
+<li>Most of the time content-type is XML or JSON (HTML is great for <em>sharing content</em> between <em>people</em>, but it isn’t great for <em>exchanging data</em> between <em>machines</em>.)</li>
+</ul>
+</section>
+<section id="what-is-xml" class="slide level2">
+<h2>What is XML?</h2>
+<p>XML is a descriptive markup language.</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;mariokart&gt;</span>
+  <span class="kw">&lt;driver</span><span class="ot"> name=</span><span class="st">&quot;Bowser&quot;</span><span class="ot"> occupation=</span><span class="st">&quot;Koopa&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;vehicle</span><span class="ot"> speed=</span><span class="st">&quot;55&quot;</span><span class="ot"> weight=</span><span class="st">&quot;25&quot;</span><span class="kw">&gt;</span> Wario Bike <span class="kw">&lt;/vehicle&gt;</span>
+    <span class="kw">&lt;vehicle</span><span class="ot"> speed=</span><span class="st">&quot;40&quot;</span><span class="ot"> weight=</span><span class="st">&quot;67&quot;</span><span class="kw">&gt;</span> Piranha Prowler <span class="kw">&lt;/vehicle&gt;</span>
+  <span class="kw">&lt;/driver&gt;</span>
+  <span class="kw">&lt;driver</span><span class="ot"> name=</span><span class="st">&quot;Peach&quot;</span><span class="ot"> occupation=</span><span class="st">&quot;Princess&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;vehicle</span><span class="ot"> speed=</span><span class="st">&quot;54&quot;</span><span class="ot"> weight=</span><span class="st">&quot;29&quot;</span><span class="kw">&gt;</span> Royal Racer <span class="kw">&lt;/vehicle&gt;</span>
+    <span class="kw">&lt;vehicle</span><span class="ot"> speed=</span><span class="st">&quot;50&quot;</span><span class="ot"> weight=</span><span class="st">&quot;34&quot;</span><span class="kw">&gt;</span> Wild Wing <span class="kw">&lt;/vehicle&gt;</span>
+  <span class="kw">&lt;/driver&gt;</span>
+<span class="kw">&lt;/mariokart&gt;</span></code></pre></div>
+<ul>
+<li>XML can (and is) used to store inherently tabular data (<a href="http://arxiv.org/pdf/1403.2805v1.pdf">thanks Jeroen Ooms</a>)</li>
+</ul>
+</section>
+<section id="xml2r" class="slide level2">
+<h2>XML2R</h2>
+<ul>
+<li>The <code>XML2R</code> package is best for the acquisition of tabular or relational XML.</li>
+<li><code>XML2R</code> attempts to coerce XML into a <em>flat</em> list of observations</li>
+<li>The list names track the “observational unit”</li>
+<li>The list values track the “observational attributes”</li>
+</ul>
+</section>
+<section id="json" class="slide level2">
+<h2>JSON</h2>
+<ul>
+<li>JSON has become the preferred format for data on the web.</li>
+<li>JavaScript Object Notation (JSON) is comprised of two components:
+<ul>
+<li>arrays =&gt; <code>[value1, value2]</code></li>
+<li>objects =&gt; <code>{&quot;key1&quot;: value1, &quot;key2&quot;: [value2, value3]}</code></li>
+</ul></li>
+<li><a href="http://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a> is the preferred R package for parsing JSON</li>
+</ul>
+</section>
+<section id="back-to-mariokart" class="slide level2">
+<h2>Back to Mariokart</h2>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;driver&quot;</span><span class="fu">:</span> <span class="st">&quot;Bowser&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;occupation&quot;</span><span class="fu">:</span> <span class="st">&quot;Koopa&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;vehicles&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;Wario Bike&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;speed&quot;</span><span class="fu">:</span> <span class="dv">55</span><span class="fu">,</span>
+                <span class="dt">&quot;weight&quot;</span><span class="fu">:</span> <span class="dv">25</span>
+            <span class="fu">}</span><span class="ot">,</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;Piranha Prowler&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;speed&quot;</span><span class="fu">:</span> <span class="dv">40</span><span class="fu">,</span>
+                <span class="dt">&quot;weight&quot;</span><span class="fu">:</span> <span class="dv">67</span>
+            <span class="fu">}</span>
+        <span class="ot">]</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;driver&quot;</span><span class="fu">:</span> <span class="st">&quot;Peach&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;occupation&quot;</span><span class="fu">:</span> <span class="st">&quot;Princess&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;vehicles&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;Royal Racer&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;speed&quot;</span><span class="fu">:</span> <span class="dv">54</span><span class="fu">,</span>
+                <span class="dt">&quot;weight&quot;</span><span class="fu">:</span> <span class="dv">29</span>
+            <span class="fu">}</span><span class="ot">,</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;Wild Wing&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;speed&quot;</span><span class="fu">:</span> <span class="dv">50</span><span class="fu">,</span>
+                <span class="dt">&quot;weight&quot;</span><span class="fu">:</span> <span class="dv">34</span>
+            <span class="fu">}</span>
+        <span class="ot">]</span>
+    <span class="fu">}</span>
+<span class="ot">]</span></code></pre></div>
+</section>
+<section id="thanks" class="slide level2 title-slide">
+<h2>Thanks!</h2>
+<div style="color: #ff5500">
+<p>Endangered Data Week</p>
+</div>
+<div id="attribution">
+<p>Jason A. Heppler, PhD<br/> <span class="smaller">Digital Engagement Librarian</span> </br> <span class="smaller">Assistant Professor of History</span> </br> <span class="smaller">jasonheppler.org | <span class="citation" data-cites="jaheppler">@jaheppler</span></span></p>
+</div>
+</section>
+
+  <!--
+  To hide progress bar from entire presentation
+  just remove “progress” element.
+  -->
+  <!-- <div class="progress"></div> -->
+  <script src="web-scraping-r_files/rmdshower/node_modules/shower/node_modules/shower-core/shower.min.js"></script>
+  <!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+  <!-- Photos by John Carey, fiftyfootshadows.net -->
+
+  
+  
+</body>
+</html>

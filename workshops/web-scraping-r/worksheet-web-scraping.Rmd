@@ -1,0 +1,171 @@
+---
+title: "Web Scraping"
+output: html_document
+---
+
+```{r}
+# Jason A. Heppler
+# Endangered Data Week - UNO Libraries
+# Spring 2017
+
+# install.packages("rvest")
+# install.packages("tidyverse")
+
+# The tidyverse package comes with several core packages useful for data
+# manipulation, visualization, and importing. They include:
+# - ggplot2: for data visualization
+# - dplyr: for data manipulation
+# - tidyr: for data tidying
+# - readr: for data import
+# - purrr: for functional programming
+# - tibble: for tibbles, a re-imagining of data frames
+```
+
+Load some necessary packages.
+
+```{r, include=FALSE}
+library(rvest)
+library(tidyverse)
+```
+
+And let's read in some data to work with, for starters.  
+
+```{r}
+URL <- "https://projects.propublica.org/tables/new-dems-donors"
+page <- read_html(URL) 
+```
+
+1. Type "page" into the R console. What do you see?
+
+2. Grab only the table of data on this page and make a data frame out of the data. Store this data frame as a new variable. (Hint: change the "show ### per page" from 100 to 400 to get the full table.)
+
+```{r}
+
+```
+
+3. Can you grab all of the links from the table? Remember to pipe. (You can use the keyboard shortcut for creating the pipes by using Ctrl+Shift+M (Windows) or Cmd+Shift+M (Mac) to insert `%>%`).
+
+```{r}
+
+```
+
+4. How would you see the text of those links?
+
+```{r}
+
+```
+
+## Basic data manipulation
+
+Once you've scraped the data you want, you'll have to do some data manipulation and clean-up. We'll go more into this on Thursday, but here are a few quick steps. Try running all the code below and understand what it's doing.
+
+Let's try another set of data. Download the "Tracking Vacant Positions by Agency and President" data.
+
+```{r}
+page2 <- read_html("https://projects.propublica.org/tables/plum-book") %>% 
+  html_node("table") %>% 
+  html_table()
+```
+
+6. Type `View(page2)` into the R console. What happens?
+
+7. Let's rename the columns into something easier to work with. (We didn't talk about this in the workshop, but it's a good thing to know.)
+
+```{r}
+names(page2) <- c("unit", "percent_vacant_1996", "percent_vacant_2004", "percent_vacant_2012")
+```
+
+Now type `View(page2)` in the console again. Notice the change?
+
+8. We can also convert the percentages into actual percentages so we can use R to do analysis. We could achieve that like this.
+
+```{r}
+library(tidyr)
+library(dplyr)
+
+# First, remove the "N/A" strings and replace them with something R understands
+page2[page2 == "N/A"] <- NA
+
+# Then, convert the numbers to integers
+page2_clean <- page2 %>% 
+  select(-unit) %>% 
+  mutate_each(funs(parse_number))
+```
+
+9. Now, type `View(page2_clean)` into the R console. Notice the difference?
+
+Now the data is in a format that would allow you to do analysis or data visualization. That's beyond the scope of today's workshop, but the above should give you a taste of what web scraping and data cleanup is like.
+
+## More: Scraping Tables
+
+Let's take a look at a page with multiple tables. Read in the data on Mexican heads of state from Wikipedia <https://en.wikipedia.org/wiki/List_of_heads_of_state_of_Mexico> and store this as a variable.
+
+```{r}
+
+```
+
+10. Grab all of the tables from this page.
+
+```{r}
+
+```
+
+11. Grab the fourth table from this page ("Provisional Government"). Hint: make sure you View Source and know how many tables might appear before this table. Hint 2: You'll need to pipe into R's subselection (e.g., `.[2]`).
+
+```{r}
+
+```
+
+12. Convert this into a data frame and save into a new variable.
+
+```{r}
+
+```
+
+## Saving the data
+
+At any point in this process, you may want to download the data for later use. There are a couple of ways you can save data from R, but we'll use Hadley Wickham's `tidyverse` library.
+
+```{r}
+library(tidyverse)
+write_csv(page2_clean, "~/Desktop/data.csv")
+```
+
+You will generally want to write data out to CSV since it's the most flexible file format for data writing  and importing. In general you should avoid using Excel -- it does things to your data that should never be done. Instead, use LibreOffice, Google Docs, or Numbers.
+
+## (Optional) Working with APIs
+
+Want an extra challenge? Try working with an API.
+
+Below, we'll use the Sunlight Foundation's API. The Sunlight Foundation is a non-profit that helps make government data transparent and accountable through data, tools, journalism, and policy. You'll need to [register for an API key](http://sunlightfoundation.com/api/accounts/register/), but can temporarily use the one provided below.
+
+```{r}
+library(jsonlite)
+key <- "&apikey=39c83d5a4acc42be993ee637e2e4ba3d"
+```
+
+13. Use the Legislator's API to find information about Nebraska's legislators. The code below will get you started, but you'll need to replace the `##` with the correct latitude and longitude. 
+
+```{r}
+#Local legislators
+legislators <- fromJSON(paste0("http://congress.api.sunlightfoundation.com/",
+  "legislators/locate?latitude=##.##&longitude=-##.##", key))
+```
+
+14. Use base R's `subset()` function to find our legislator's last name, chamber, the start of their term, and their Twitter ID. Hint: You'll be subsetting the `legislators$results` and must use an array `c()` to find results. Be sure to view the data frame for the columns you'll want to select.
+
+```{r}
+
+```
+
+Now, try using the New York Times API key. Again, you'll need to register but the key below is for illustration. Try searching for articles that mention Trump and ACA.
+
+```{r}
+#search for articles
+article_key <- "&api-key=c2fede7bd9aea57c898f538e5ec0a1ee:6:68700045"
+
+url <- "http://api.nytimes.com/svc/search/v2/articlesearch.json?q=<SEARCH TERM>"
+req <- fromJSON(paste0(url, article_key))
+articles <- req$response$docs
+colnames(articles)
+```

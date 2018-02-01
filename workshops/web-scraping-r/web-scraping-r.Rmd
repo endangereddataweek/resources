@@ -1,0 +1,386 @@
+---
+title: "Web Scraping with R"
+author: "Jason Heppler"
+ratio: "16x10"
+output:
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: false
+    theme: material
+    css: custom.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+
+library(tidyverse)
+```
+
+## Web Scraping with R {.title-slide}
+
+<img style="width: 250px; height: auto;" src="edw-logo.png"/>
+
+<http://endangereddataweek.org>
+
+<div id="attribution" style="line-height: 1.2em;">
+Jason A. Heppler, PhD<br/>
+<span class="smaller">Digital Engagement Librarian</span> </br>
+<span class="smaller">Assistant Professor of History</span> </br>
+<span class="smaller">jasonheppler.org | @jaheppler</span>
+</div>
+
+## Agenda
+
+- What web scraping is and when to do it
+- Review of HTML and CSS
+- Basics of R
+- Web scraping with R
+
+## RStudio Server
+
+All passwords are `edw2017`. Usernames are listed below the link:
+
+<http://107.170.21.144:8787/auth-sign-in>  
+username: tbattula  
+
+<http://107.170.21.142:8787/auth-sign-in>  
+username: sali  
+
+<http://107.170.21.84:8787/auth-sign-in>  
+username: jriley  
+
+<http://107.170.21.90:8787/auth-sign-in>  
+username: yohira  
+
+## What is web scraping?
+
+- Writing a program to extract ("scrape") data from web pages.
+- Programatically pulling information out of HTML.
+
+## Why scrape?
+
+- A provider might **show** their data, but is unwilling to **share** it.
+- A provider may not have the time/budget/expertise to share it in a more convenient form.
+
+## Keep in mind
+
+- If data is on a single page and never changes, a copy-and-paste might be faster.
+- Check if there's an Application Programming Interface available, which allows you to get structured data.
+- See if someone else already wrote a script. 
+
+## Data is messy
+
+We want data to be in a tidy format, where:
+
+- rows = observations
+- columns = attributes
+
+<div id="aside">
+(More on this at the workshop on Thursday.)
+</div>
+
+## Data is messy
+
+This is a convenient framework for machine and human-readable data, but data doesn't always begin in this tidy format (especially on the web).
+
+- A 2008 MIT study estimated that there exists **154 million** tables with high quality data on the web.
+- The study also suggested that around **30 million** lists likewise contained high quality data.
+
+This talk will provide a quick overview of popular methods for acquiring info/data from the web using R.
+
+## The rvest package
+
+`rvest` is an R package for scraping content off the web page, and works as a wrapper for `xml2` and `httr`.
+
+All of these packages are under active development, which means they often have new functions added, old functions removed, and existing functions changed.
+
+## HTML and CSS
+
+Web scraping means downloading the raw HTML page, pulling out the information we want, and getting it into a structure we can analyze. 
+
+Web sites also use Cascading Style Sheets (CSS) to change the "look" of a website.
+
+You can see any of this code anytime by right-clicking on a webpage and selecting "View Page Source."
+
+## CSS Selectors
+
+`rvest` uses CSS selectors to select the element(s) we want. We might want to grab a text element with an ID of "title" 
+
+`<p id="title">This Title</p>`
+
+Or, grab more sophisticated CSS, such as all link elements whose links end with `.pdf` 
+
+`a[href$=".pdf"]`
+
+`rvest` uses CSS selectors to select text and scrape.
+
+
+## Example
+
+<https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California>
+
+## Inspect elements
+
+```{r, warning=FALSE, message=FALSE}
+library(rvest)
+src <- read_html("https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California")
+node <- html_node(src, css = ".wikitable")
+```
+
+- `".wikitable"` is a CSS selector which says: "grab nodes (aka elements) with a class of wikitable".
+- `html_table()` converts a single `<table>` node to a data frame.
+
+## Inspect elements
+
+```{r, warning=FALSE, message=FALSE}
+library(rvest)
+src <- read_html("https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California")
+node <- html_node(src, css = ".wikitable") 
+html_table(node)
+```
+
+## What happened?
+
+- We loaded the `rvest` package.
+- We used the `read_html` function to read the HTML page.
+- We used `html_nodes` function to find those parts of the page where `<table id="wikitable">`.
+- We converted the results into a table view with the `html_table` function.
+
+## Piping is also available
+
+The tools of the `tidyverse` gives us an option to pipe (`%>%`), or pass one set of information, functions, or commands, to another. Below, we 
+
+- use the `read_html()` function to read the URL 
+- then pass those results directly to our `html_node()` function 
+- then pass *those* results to the `html_table()` function
+
+```{r}
+read_html("https://en.wikipedia.org/wiki/List_of_Superfund_sites_in_California") %>%
+  html_node(".wikitable") %>% html_table()
+```
+
+## Scraping Tables
+
+HTML tables are contained within `<table>` tags. Using `html_nodes("table")` will find all the tables on a page. If you want a specific table, you can use a function from the `tidyr` package to select a specific table. For example, if you want the third table on the page, you would run:
+
+```{r, eval =F}
+library(tidyr)
+
+page %>%
+  html_nodes("table") %>% 
+  # We will subset the nodes using Base R
+  .[3]
+```
+
+Then use `html_table()` to convert the table to a data frame.
+
+## Another rvest example
+
+Extract text with a class of `p1`.
+
+## Another rvest example
+
+Extract text with a class of `p1`.
+
+```{r, eval=F}
+page %>%
+  html_nodes(css = ".p1") %>%
+  html_text()
+```
+
+## Another rvest example
+
+Extract text tagged with `<strong>`.
+
+## Another rvest example
+
+Extract text tagged with `<strong>`.
+
+```{r, eval=F}
+page %>%
+  html_nodes(css = "strong") %>%
+  html_text()
+```
+
+## Another rvest example
+
+Grab all of the paragraphs on a webpage tagged with `<p>`.
+
+## Another rvest example
+
+Grab all of the paragraphs on a webpage tagged with `<p>`.
+
+```{r, eval = F}
+page %>%
+  html_nodes(css = "p") %>%
+  html_text()
+```
+
+## rvest Workflow
+
+1. Read in a web page with `read_html()`
+2. Pick some portion of the page using `html_nodes()` with a CSS selector
+3. Pass the extraction to `html_text()` or `html_table()`
+
+## Finding the CSS selector to use
+
+Three approaches:
+
+1. View page source and figure it out.
+2. Use the browser's "Inspector" function (available in Chrome, Firefox, and Safari).
+3. Use SelectorGadget, a Javascript bookmarklet or Chrome plugin for your browser.
+
+## SelectorGadget
+
+Go to <https://cran.r-project.org/web/packages/rvest/vignettes/selectorgadget.html>, and drag the SelectorGadget link to your bookmark bar.
+
+## SelectorGadget
+
+1. Click the SelectorGadget button.
+2. Hover over an element you want to select and click. It will turn green and reveal the CSS selector. Other matching elements will be colored yellow.
+3. If necessary, scroll around the document to find elements you don't want to match and click on them.
+
+## Your Turn
+
+Navigate here: <http://www.imdb.com/title/tt1490017/> and try the following:
+
+- Grab the rating of the film. Be aware of the node selectors you'll need for finding the rating.
+- Create a list of the cast for the film.
+- (Optional) Get the link for the movie poster.
+
+```{r echo = F, warning = F, error = F, eval = F}
+# answer
+read_html("http://www.imdb.com/title/tt1490017/") %>%
+  html_nodes("div.ratingValue strong span") %>% html_text()
+
+read_html("http://www.imdb.com/title/tt1490017/") %>%
+  html_nodes("#titleCast .itemprop span") %>%
+  html_text()
+
+read_html("http://www.imdb.com/title/tt1490017/") %>%
+  html_nodes(".poster img") %>%
+  html_attr("src")
+```
+
+## Your Turn
+
+Try completing the worksheet. Feel free to work together!
+
+## Don't abuse your power
+
+- If you scrape a website, read the terms and conditions
+- It's sometimes more efficient/appropriate to find the API
+- If a website public offers an API use that instead of scraping
+
+<http://www.wired.com/2014/01/how-to-hack-okcupid>
+
+<http://www.vox.com/2016/5/12/11666116/70000-okcupid-users-data-release>
+
+## Web APIs
+
+- [Server-side Web APIs](https://en.wikipedia.org/wiki/Web_API#Server-side) (Application Programming Interfaces) are a popular way to provide easy access to data and other services. 
+- If you (the client) want data from a server, you typically need one HTTP verb -- `GET`.
+
+```{r}
+library(httr)
+hepplerj <- GET("https://api.github.com/users/hepplerj")
+content(hepplerj)[c("name", "company")]
+```
+
+- Other HTTP verbs -- `POST`, `PUT`, `DELETE`
+
+## Request/response model {.build}
+
+- When you (the client) _requests_ a resource from the server. The server _responds_ with a bunch of additional information.
+
+```{r}
+hepplerj$header[1:3]
+```
+
+- Most of the time content-type is XML or JSON (HTML is great for _sharing content_ between _people_, but it isn't great for _exchanging data_ between _machines_.)
+
+## What is XML?
+
+XML is a descriptive markup language. 
+
+```xml
+<mariokart>
+  <driver name="Bowser" occupation="Koopa">
+    <vehicle speed="55" weight="25"> Wario Bike </vehicle>
+    <vehicle speed="40" weight="67"> Piranha Prowler </vehicle>
+  </driver>
+  <driver name="Peach" occupation="Princess">
+    <vehicle speed="54" weight="29"> Royal Racer </vehicle>
+    <vehicle speed="50" weight="34"> Wild Wing </vehicle>
+  </driver>
+</mariokart>
+```
+
+- XML can (and is) used to store inherently tabular data ([thanks Jeroen Ooms](http://arxiv.org/pdf/1403.2805v1.pdf))
+
+## XML2R
+
+- The `XML2R` package is best for the acquisition of tabular or relational XML.
+- `XML2R` attempts to coerce XML into a *flat* list of observations
+- The list names track the "observational unit"
+- The list values track the "observational attributes"
+
+## JSON
+
+- JSON has become the preferred format for data on the web.
+- JavaScript Object Notation (JSON) is comprised of two components:
+    * arrays => `[value1, value2]`
+    * objects => `{"key1": value1, "key2": [value2, value3]}`
+- [jsonlite](http://cran.r-project.org/web/packages/jsonlite/index.html) is the preferred R package for parsing JSON
+
+## Back to Mariokart
+
+```json
+[
+    {
+        "driver": "Bowser",
+        "occupation": "Koopa",
+        "vehicles": [
+            {
+                "model": "Wario Bike",
+                "speed": 55,
+                "weight": 25
+            },
+            {
+                "model": "Piranha Prowler",
+                "speed": 40,
+                "weight": 67
+            }
+        ]
+    },
+    {
+        "driver": "Peach",
+        "occupation": "Princess",
+        "vehicles": [
+            {
+                "model": "Royal Racer",
+                "speed": 54,
+                "weight": 29
+            },
+            {
+                "model": "Wild Wing",
+                "speed": 50,
+                "weight": 34
+            }
+        ]
+    }
+]
+```
+
+## Thanks! {.title-slide}
+
+<div style="color: #ff5500">
+Endangered Data Week
+</div>
+
+<div id="attribution">
+Jason A. Heppler, PhD<br/>
+<span class="smaller">Digital Engagement Librarian</span> </br>
+<span class="smaller">Assistant Professor of History</span> </br>
+<span class="smaller">jasonheppler.org | @jaheppler</span>
+</div>
