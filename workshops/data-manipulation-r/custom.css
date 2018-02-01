@@ -1,0 +1,75 @@
+
+.slide p {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+
+.slide h1, .slide h2, .slide h3 {
+  font-family: "Fira Sans", sans-serif;
+}
+
+.slide code {
+  font-family: "Fira Mono", monospace;
+}
+
+.slide ul li {
+  font-weight: 300;
+}
+
+.double {
+  column-gap: -150px;
+}
+
+.right-flow {
+  margin-left: -200px;
+}
+
+.one-col-image-wide {
+  margin-left: -40px;
+  width: 510px;
+  z-index: 2000;
+}
+
+.important-point {
+  font-size: 1.5em;
+}
+
+.slide::after {
+  display: none;
+}
+
+div#attribution {
+  font-size: 0.8em;
+  float: right;
+  padding-top: 120px;
+}
+
+.smaller {
+  font-size: 0.6em;  
+}
+
+strong {
+  padding: .2rem .4rem;
+  border-radius: 2px;
+  background-color: #ffd43b;
+}
+
+blockquote {
+  margin: 2em 1em 2em 0;
+  padding-left: 1em;
+  padding-right: 1em;
+  font-style: italic;
+  border-left: .25em solid #ffd43b;
+}
+
+div#aside {
+  padding: .2rem .2rem;
+  text-align: center;  
+  border-radius: 2px;
+  background-color: #7BABFF;
+}
+
+img {
+  width: 700px;
+  height: auto;
+}

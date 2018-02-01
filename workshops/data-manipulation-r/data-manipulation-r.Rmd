@@ -1,0 +1,166 @@
+---
+title: "Introduction to Data Manipulation with R"
+author: "Jason Heppler"
+ratio: "16x10"
+output:
+  rmdshower::shower_presentation:
+    self-contained: false
+    katex: false
+    theme: material
+    css: custom.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+
+library(historydata)
+library(tidyverse)
+```
+
+## Introduction to data manipulation with the grammar of data {.title-slide}
+
+<img style="width: 250px; height: auto;" src="edw-logo.png"/>
+
+<http://endangereddataweek.org>
+
+<div id="attribution" style="line-height: 1.2em;">
+Jason A. Heppler, PhD<br/>
+<span class="smaller">Digital Engagement Librarian</span> </br>
+<span class="smaller">Assistant Professor of History</span> </br>
+<span class="smaller">jasonheppler.org | @jaheppler</span>
+</div>
+
+## Overview
+
+- Tidy Data
+- Packages of the Tidyverse
+- Hands-on worksheet
+
+## Accessing RStudio Server
+
+All passwords are `edw2017`.
+
+tbattula
+<http://107.170.21.144/rstudio/>
+
+jriley
+<http://107.170.21.84/rstudio/>
+
+bbryan
+<http://107.170.30.49/rstudio/>
+
+dkelberlau
+<http://107.170.31.212/rstudio/>
+
+yohira
+<http://107.170.21.90/rstudio/>
+
+sali
+<http://107.170.21.142/rstudio/>
+
+## Three kinds of data
+
+- **Trees**: a branching, hierachical structure; leaves contain other leaves or any kind of data. *Examples:* directory structure of a computer; the text of a book.
+- **Tables**: rectangular data with rows and columns; different columns may contain different kinds of data. *Examples:* census data.
+      - **Matrices**: A special kind of rectangular data where all the columns contain only one kind of data; permits quick computation and compact storage. *Examples:* document-term matrix; network adjacency matrix.
+
+## Tidy data
+
+In tidy data, according to Hadley Wickham's definition, 
+
+- Each variable forms a column.
+- Each observation forms a row.
+- Each type of observational unit forms a table.
+ 
+Tidy data permits a grammar of data manipulation as well as a grammar of graphics.
+ 
+## Tidy or not?
+
+| state          | 1790 | 1800 | 1810 | 1820 | 1830 | 1840
+|----------------|------|------|------|------|------|-------
+| Virginia       | 1    | 2    | 3    | 4    | 5    | 6
+| Massachusetts  | 7    | 8    | 9    | 10   | 11   | 12
+| New York       | 13   | 14   | 15   | 16   | 17   | 18
+| Connecticut    | 19   | 20   | 21   | 22   | 23   | 24
+
+## Tidy or not?
+
+| state         | year   | population
+|---------------|--------|---------------
+| Virginia      | 1790   | 1
+| Massachusetts | 1790   | 7
+| New York      | 1790   | 13
+| Connecticut   | 1790   | 19
+| Virginia      | 1800   | 2
+| Massachusetts | 1800   | 8
+| New York      | 1800   | 14
+| Connecticut   | 1800   | 20
+
+## Tidy or not?
+
+```{r, echo=FALSE}
+data("economics")
+data("economics_long")
+economics %>% select(date, pop, unemploy) %>% 
+  head(8)
+```
+
+## Tidy or not?
+
+```{r, echo=FALSE}
+economics_long %>% select(-value01)
+```
+
+## Tidy or not?
+
+| year | french_frigates | spanish_frigates | french_galleons | spanish_galleons
+|------|-----------------|------------------|-----------------|-------------------
+| 1810 |               92| 390              | 42              | 32
+| 1811 |               95| 396              | 31              | 31
+| 1812 |               90| 330              | 28              | 35
+| 1813 |               86| 320              | 23              | 21 
+
+## {.fullscreen}
+
+![Hadley's flow.](hadley.png)
+
+## Welcome to the tidyverse
+
+We'll be using an R package called `tidyverse`, a collection of several packages useful for data manipulation, tidying, and visualization. 
+
+- `ggplot2`, for data visualization
+- `dplyr`, for data manipulation
+- `tidyr`, for data tidying
+- `readr`, for data import
+- `purrr`, for functional programming
+- `tibble`, for tibbles, a re-imagining of data frames
+
+## Grammar of data manipulation (dplyr + tidyr)
+
+`tidyr` and `dplyr` are great for making data tidy, and for manipulating tidy data.
+
+- `select()`: pick columns/variables
+- `filter()`: pick rows/observations
+- `arrange()`: sort by a column or set of columns
+- `mutate()`: compute a new column from existing columns
+- `left_join()`: connect two datasets with a common variable
+- `group_by()` and `summarize()`: aggregate data in groups
+- `gather()` and `spread()`: switch between wide and long data
+
+## dplyr + tidyr
+
+The grammar of the `tidyverse` makes running and writing code much easier and cleaner.
+
+Base R:
+
+`crime.ny.2005 <- crime.ny.2005[, c("Type.of.Crime", "Count")]`
+
+dplyr:
+
+`crime.ny.2005 <- select(crime.ny.2005, Type.of.Crime, Count)`
+
+## Folow along / exercise
+
+Open the file `https://goo.gl/fKYLYf`. Paste into RStudio and follow along to practice the grammar of data manipulation.
+
+## Thanks!
