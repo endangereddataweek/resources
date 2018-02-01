@@ -1,0 +1,200 @@
+<!DOCTYPE html><html><head><title></title><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /><style type='text/css'>
+body {
+  font-family:'Avenir';
+  background:#000;
+  color:#fff;
+  margin:0;
+  padding:0;
+  font-weight:bold;
+}
+
+h1, h2, h3, p {
+  margin:0;
+}
+
+strike {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+em, a {
+  font-style:normal;
+  color:#ffd43b;
+}
+
+code {
+  font-family:'M+ 1m', Consolas, monospace;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+a {
+  background:#34d0e7;
+  color:#000;
+  text-decoration:none;
+}
+
+img {
+  width:100%;
+}
+
+body > div {
+  cursor:pointer;
+  cursor:hand;
+  position:absolute;
+  top:0px;
+  left:0px;
+  padding:10%;
+}
+
+div.center {
+  text-align:center;
+}
+
+div.imageText {
+  text-shadow:0px 0px 5px rgba(0,0,0,0.2);
+}
+
+notes {
+    display:none;
+}
+/* normally not good, but ok in context of full screen directional navigation */
+:focus {
+    outline: 0;
+}
+pink {
+  color: pink;
+  font-size: 1.3em;
+}
+</style><script type='text/javascript'>
+window.onload = function() {
+  var s = document.querySelectorAll('body > div'), ti, i;
+  var notes = [];
+  for (i = 0; i < s.length; i++) {
+    s[i].setAttribute('tabindex', 0);
+    var noteElements = s[i].getElementsByTagName('notes');
+    notes.push([]);
+    while (noteElements.length) {
+      var note = noteElements[0];
+      notes[i].push(note.innerHTML.trim());
+      note.parentNode.removeChild(note);
+    }
+  }
+  if (!s.length) return;
+  var big = window.big = { current: 0, forward: fwd, reverse: rev, go: go, length: s.length };
+  function resize() {
+    var w = window.innerWidth, h = window.innerHeight, e = s[big.current];
+    e.style.fontSize = h + 'px';
+    function pass(cinch, start) {
+      for (var i = start; i > 0 && (e.offsetWidth > w || e.offsetHeight > h); i -= cinch) {
+        e.style.fontSize = i + 'px';
+      }
+      return i + cinch;
+    }
+    pass(2, pass(5, pass(10, h - 2)));
+    e.style.marginTop = (h - e.offsetHeight) / 2 + 'px';
+  }
+  function go(n) {
+    big.current = n;
+    for (i = 0; typeof console === 'object' && i < notes[n].length; i++) console.log('%c%s: %s', 'padding:5px;font-family:serif;font-size:18px;line-height:150%;', n, notes[n][i]);
+    var e = s[n], t = parseInt(e.getAttribute('data-time-to-next') || 0, 10);
+    document.body.className = e.getAttribute('data-bodyclass') || '';
+    for (i = 0; i < s.length; i++) s[i].style.display = 'none';
+    e.style.display = 'inline';
+    e.focus();
+    // if (e.firstChild && e.firstChild.nodeName === 'IMG') {
+    //   document.body.style.backgroundImage = 'url("' + e.firstChild.src + '")';
+    //   e.firstChild.style.display = 'none';
+    //   if ('classList' in e) e.classList.add('imageText');
+    // } else {
+    //   document.body.style.backgroundImage = '';
+    //   document.body.style.backgroundColor = e.style.backgroundColor;
+    // }
+    if (ti !== undefined) window.clearInterval(ti);
+    if (t > 0) ti = window.setTimeout(fwd, t * 1000);
+    resize();
+    if (window.location.hash !== n) window.location.hash = n;
+    document.title = e.textContent || e.innerText;
+  }
+  document.onclick = function(e) { if (e.target.tagName !== 'A') go(++big.current % s.length); };
+  function fwd() { go(Math.min(s.length - 1, ++big.current)); }
+  function rev() { go(Math.max(0, --big.current)); }
+  document.onkeydown = function(e) {
+    if (e.which === 39 || e.which === 34 || e.which === 40) fwd();
+    if (e.which === 37 || e.which === 33 || e.which === 38) rev();
+  };
+  document.ontouchstart = function(e) {
+    var x0 = e.changedTouches[0].pageX;
+    document.ontouchend = function(e2) {
+      var x1 = e2.changedTouches[0].pageX;
+      if (x1 - x0 < 0) fwd();
+      if (x1 - x0 > 0) rev();
+    };
+  };
+  function parse_hash() {
+    return Math.max(Math.min(s.length - 1,
+      parseInt(window.location.hash.substring(1), 10)), 0);
+  }
+  if (window.location.hash) big.current = parse_hash() || big.current;
+  window.onhashchange = function() {
+    i = parse_hash();
+    if (i !== big.current) go(i);
+  };
+  window.onresize = resize;
+  go(big.current);
+};
+</script></head><body>
+
+<div>An Introduction to <span style="color: #0366d6;">Github</span></div>
+
+<div>Jason = digital engagement librarian, assistant professor of history</div>
+<div>Jason = open source zealot, data visualization, public history, digital history, <pink>❤</pink> data</div>
+<div>What is <em>git</em> and <em>Github</em>?</div>
+<div>Git is for storage</div>
+<div>Git is for development</div>
+<div>Git is for sustainability</div>
+<div>Github is for collaboration</div>
+<div>Github is software</div>
+<div>Github is for data</div>
+<div>Github provides <em>version control</em> for tracking changes</div>
+<div>
+Version control
+<ul>
+<li>Track changes (or versions) of anything: document, file, image, etc</li>
+<li>Version control allows you to go back to previous versions</li>
+</ul>
+</div>
+<div>
+Git is a <em>distributed version control</em>. Anyone has local repositories to reconcile with the main server.
+</div>
+<div>The vocabulary of git</div>
+<div><em>Commit</em> a "save" of a version</div>
+<div><em>Repository</em> (or repo) is the project where files live</div>
+<div><em>Branch</em> is a copy of a repo. You can experiment here without affecting the original project. Then you can <em>merge</em> those changes when you're done.</div>
+<div><em>Fork</em> means to copy someone else's repo to build on/improve it and contribute changes back</div>
+<div><em>Clone</em> means you're pulling down a forked repo to your local machine.</div>
+<div>Github lets us <em>sync projects</em> locally, and commit changes we can <em>track over time</em></div>
+<div><img src="github-diss.png"/></div>
+<div>Let's set up our first Github project together</div>
+<div>We can use Github through the terminal, on the desktop, or the website itself</div>
+<div>Let's start with the <a href="http://github.com">website</a></div>
+<div>Usually, the files will be local to your machine</div>
+<div>We can use the desktop application</div>
+<div><img src="github-desktop.png"/></div>
+<div>Most development projects use the command line</div>
+<div>Terminal commands like <code>git clone</code>, <code>git pull</code>, <code>git fetch</code>, <code>git branch</code></div>
+<div><code>git clone https://github.com/DocNow/twarc.git</code></div>
+<div>Try yourself:
+<a href="https://try.github.io/">https://try.github.io/</a>
+</div>
+<div>We can even do basic mapping in Github using Gists (provided you have a <em>GeoJSON</em> file)</div>
+<div><img src="github-geojson.gif"/></div>
+<div>Remember: Github is a business</div>
+<div>Remember: Github could disappear</div>
+<div>Remember: Github is not preservation</div>
+<div>Github is a fine place for sharing data</div>
+<div>FiveThirtyEight</div>
+<div>The New York Times</div>
+<div>Open access research</div>
+<div>But data deserves a <em>sustainable</em> home</div>
+<div>Institutional repositories: DataLumos, ICPSR, Digital Commons</div>
+<div><pink>❤</pink> data
+</div>
