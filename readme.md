@@ -5,6 +5,7 @@
 - [EDW logo tiled background design](https://github.com/endangereddataweek/resources/tree/master/media/designelements)
 - [Save the Date postcards](https://github.com/endangereddataweek/resources/tree/master/media/savethedate2018-postcards)
 - [Print your own stickers](https://github.com/endangereddataweek/resources/tree/master/media/logo-stickers)
+- [Make your own buttons](https://github.com/endangereddataweek/resources/blob/master/media/Endangered%20Data%20week%201.5%20in%20buttons%20012418.pdf)
 
 ## Resources for events
 (in development)
