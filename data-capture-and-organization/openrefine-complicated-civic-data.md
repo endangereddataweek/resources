@@ -10,7 +10,7 @@ It is quite common for civic data to be shared in formats that are confusing, il
 
 Both of the following datasets come from the [Police Data Initiative](https://www.policedatainitiative.org/), a police-driven project that encourages departments across the United States to make incident-level, machine readable data publicly available. Even within this initiative, each department's dataset is significantly different in terms of structure, information inclusion, and delivery method.
 
-This tutorial will provide instruction on normalizing, correcting, and restructuring, and combining two datasets from the initiative using OpenRefine.
+This tutorial will provide instruction on normalizing, correcting, and restructuring two datasets from the initiative using OpenRefine.
 
 [Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/openrefine-workshop-files/lansing-burlington-traffic-stops.zip).
 
@@ -19,6 +19,89 @@ This tutorial will provide instruction on normalizing, correcting, and restructu
 [OpenRefine](http://openrefine.org/) (formerly known as GoogleRefine), is a very popular tool for working with unorganized, non-normalized (what some may call "messy") data. OpenRefine accepts TSV, CSV, XLS/XLSX, JSON, XML, RDF as XML, and Google Data formats, though others may be used with extensions. It works by opening into your default browser window, but all of the processing takes place on your machine and your data isn't uploaded anywhere. 
 
 **This tutorial will demonstrate some of the most popular and powerful features of OpenRefine, including geocoding using an API, algorithmic word normalization and correction, time and date manipulation.**
+
+## Burlington, VT Dataset
+
+### Loading the Dataset
+
+- The original [Burlington, VT Traffic Stop Dataset](https://www.burlingtonvt.gov/Police/Data/RawData) is available through the Burlington Police Transparency Portal.
+- Open OpenRefine - it should open a window in your default web browser (if it's already open, you can click 'Open' at the top to start a new project)
+- Click 'Browse' and locate the Burlington CSV on your hard drive. Then click 'Next.'
+- The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
+- Click 'Create Project' in the top right corner.
+
+### Evaluation
+
+The 'Date Issued' column seems to be structured regularly, but the format isn't generally recognized as machine-readable, and the times are on a 12-hr clock instead of a 24-hr clock. 
+
+It's great that this dataset has addresses, but they're not all that helpful for a lot of mapping applications. It would be a lot more useful if those had latitute and longitude instead.
+
+### Reformatting Date and Time
+
+OpenRefine has some fairly simple built-in functionality that will help us convert this 12-hr clock to 24-hr and to make the date machine readable.
+
+This tool won't work on any times that are 12:xx PM, so we'll need to make a quick change on the 170 rows that fall in the noon hour.
+
+- It's always good to make a backup before we start changing things. Click on the triangle next to Date Issued, then hover over Edit Column, then select Add column based on column@@
+- The GREL (General Refine Expression Language) window allows you to make some alterations to the original column values. For now, we just want to copy it so we'll leave it as-is. Leave `value` in the GREL window and change the name to 'orig_Date_Issued' and hit OK
+- Click Date Issued > Text filter
+- Enter 'PM' to filter out all but the 3,278 records issued in the PM
+- Click Date Issued > Edit Cells > Transform
+- Enter `value.replace(" 12:"," 00:")` - this will change all times starting with 12 to 00. The inclusion of the space and colon ensures that no months, minutes, or seconds are impacted. Click OK. This should work on 170 cells.
+- On the left side, click 'Remove All' to remove the text filter and bring back both AM and PM rows.
+- Click Date Issued > Edit cells > Common Transforms > To Date - this will convert all of the dates into a standard [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
+- You can spot-check Date Issued with orig_Date_Issued to make sure everything is correct. Record #36 takes place at 12:47 PM, and you can see that the conversion worked for those cells we edited.
+
+### Geocoding
+This dataset has the locations of each traffic stop in it, but for many mapping platforms, knowing the street address isn't enough. Luckily, OpenRefine can use Geolocation APIs to find a latitude and longitude for addresses - even if they're just cross-street descriptions like the ones most commonly used in this dataset.
+
+#### Quick Workshop Version
+
+*We'll do a small subset of these traffic stops using Google Maps, which doesn't require a user key to access the geocoder. The downsides of using Google Maps are that they do not allow the data to be used in platforms besides Google Maps, and that they have a limit of 2,500 requests per day. This process is taken from the [OpenRefine Wiki](https://github.com/OpenRefine/OpenRefine/wiki/Geocoding), which also includes instructions on using the Google API in batches to complete an entire datset*
+
+Since there's a limit of 2,500 requests per day and the API takes a bit of time, we'll filter out just two rows to gather latitude and longitude.
+
+- Click Commercial Vehicle > Facet > Text Facet
+- Click 'True' to only show the 2 rows that were related to traffic accidents
+- Click Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `"http://maps.google.com/maps/api/geocode/json?sensor=false&address=" + escape(value, "url")`
+- Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
+- The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
+- Click geocodingResponse > Edit Column > Add Column based on this column
+- Enter `with(value.parseJson().results[0].geometry.location, pair, pair.lat +", " + pair.lng)` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
+- You can delete the 'geocodingResponse' column after you have already extracted the lat/lng coordinates.
+
+#### Full Development 
+*Note: this will take an hour or two to process fully, so it's a good idea to set it up to run overnight*
+
+- Get a MapQuest API Key from the [MapQuest Developer Site](https://developer.mapquest.com/) - click the 'Get your Free API Key' button on the front page and fill out the information.
+- Once you have an API key, Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `'http://open.mapquestapi.com/nominatim/v1/search.php?' + 'key=*YOUR KEY*&' + 'format=json&' + 'q=' + escape(value, 'url')` **Note: be sure to add your own API key in the above expression where it says `*YOUR KEY*`**
+- Name the column 'geocodingResponse' and click OK. This will take quite some time to finish.
+- The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
+- Click geocodingResponse > Edit Column > Add Column based on this column
+- Enter `with(value.parseJson().resourceSets[0].resources[0].point.coordinates, pair, pair[0] +", " + pair[1])` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
+- You should see that the resulting column has the lattitude and longitude for the address or cross streets.
+
+### Correcting Typos and Merging Terms
+One of the most tedious parts of data cleaning is finding the typos and mistakes in the data, and similarly, finding multiple terms that are essentially the same or are intended to be the same, and merging them together.
+
+One good way to find typos or categories you can collapse is by doing text facets that show you the composition of the column. *You can find more information about the clustering algorithms in the [OpenRefine wiki](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).*
+
+- Click on City > Facet > Text Facet. You should see a number of terms that can probably be collapsed and altered, such as Burlignton > Burlington, Burlington VT > Burlington, and Essex Junction > Essex Jct.
+- Click on the `x` to close the City facet.
+- Click on City > Edit Cells > Cluster and edit...
+- The first one uses the Key Collision method. Here you should be able to correct S Burlington & S. Burlington into one. Check the 'Merge?' checkbox, then click on 'Merge Selected & Re-Cluster.'
+- Change the method to 'nearest neighbor', and then set the Radius at 3.0. We'll grow this progressively higher to cast a wider net.
+- There are a number of different ways people have entered S/So/South Burlington, lets take all of those and change them to 'South Burlington'. Type in the new cell value in the right, and check the boxes that look like they should be South Burlington. Be careful not to re-cluster the South Burlingtons with Burlington. 
+- Work through a few rounds of this, increasing the Radius and correcting the cells that appear to be incorrect. (Tip - there are several that have 05401 in them - they're likely referring to Burlington proper by its zip code.)
+- Clustering is really helpful, but doesn't always solve every problem. Close the cluster screen, and go back to Text Facets.
+- There are still a few incorrect versions of Burlington left. You can hover over all of the Facets and click on 'edit' on the right to edit all instances of the cluster.
+- Close the 'City' Text Facet and open up a Text Facet on the 'Race' column.
+- Here we can see a few entries (B=Black, W=White) that didn't follow the standard input. We can edit them here in the Facet. You may also want to enter 'Null' in place of the blank ones, or change blank to 'Unknown'.
+
+### Saving and Exporting
+In the top right corner, you can click on 'Export' and save the data in a number of different formats, including csv and HTML tables.
+
+You may also want to export the entire project. This is useful if you want to share the project with others, or if you want to continue working on a different machine. It's also useful for transparency and documentation, as every change you've made is documented (and reversible).
 
 ## Lansing, MI Traffic Stops
 
@@ -46,7 +129,7 @@ Before we change too much, we should duplicate the columns so that we can check 
 - Click on the triangle near the 'AM_PM' column header
 - Scroll down to 'Edit Column' and then select 'Add column based on this column'
 - Name the new column 'orig_AM_PM'
-- The Expression box allows you to make some alterations to the original column values. For now, we just want to copy it so we'll leave it as-is.
+- The GREL (General Refine Expression Language) box allows you to make some alterations to the original column values. For now, we just want to copy it so we'll leave it as-is.
 - Click OK
 - Repeat this with the 'Time' column: Click on the triangle near Time > Edit Column > Add column based on this column.
 - Call the new column 'orig_Time' and click ok.
@@ -108,89 +191,6 @@ Now that this is fixed, we can filter out the PM dates to work with:
 Double-check DateTime against the original times and dates to make sure that we've done this correctly. If so, we can remove 'AM_PM,' 'Time 2,', and 'Date.' 
 
 One note: This time is still technically incorrect. These are all in local time, though the use of Z indicates that it's in UTC.
-
-### Saving and Exporting
-In the top right corner, you can click on 'Export' and save the data in a number of different formats, including csv and HTML tables.
-
-You may also want to export the entire project. This is useful if you want to share the project with others, or if you want to continue working on a different machine. It's also useful for transparency and documentation, as every change you've made is documented (and reversible).
-
-## Burlington, VT Dataset
-
-### Loading the Dataset
-
-- The original [Burlington, VT Traffic Stop Dataset](https://www.burlingtonvt.gov/Police/Data/RawData) is available through the Burlington Police Transparency Portal.
-- Open OpenRefine - it should open a window in your default web browser (if it's already open, you can click 'Open' at the top to start a new project)
-- Click 'Browse' and locate the Burlington CSV on your hard drive. Then click 'Next.'
-- The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
-- Click 'Create Project' in the top right corner.
-
-### Evaluation
-
-The 'Date Issued' column seems to be structured regularly, but the format isn't generally recognized as machine-readable, and the times are on a 12-hr clock instead of a 24-hr clock. 
-
-It's great that this dataset has addresses, but they're not all that helpful for a lot of mapping applications. It would be a lot more useful if those had latitute and longitude instead.
-
-### Reformatting Date and Time
-
-OpenRefine has some fairly simple built-in functionality that will help us convert this 12-hr clock to 24-hr and to make the date machine readable.
-
-This tool won't work on any times that are 12:xx PM, so we'll need to make a quick change on the 170 rows that fall in the noon hour.
-
-- It's always good to make a backup before we start changing things. Click Date Issued > Edit Column > Add column based on column.
-- Leave `value` in the GREL window and change the name to 'orig_Date_Issued' and hit OK
-- Click Date Issued > Text filter
-- Enter 'PM' to filter out all but the 3,278 records issued in the PM
-- Click Date Issued > Edit Cells > Transform
-- Enter `value.replace(" 12:"," 00:")` - this will change all times starting with 12 to 00. The inclusion of the space and colon ensures that no months, minutes, or seconds are impacted. Click OK. This should work on 170 cells.
-- On the left side, click 'Remove All' to remove the text filter and bring back both AM and PM rows.
-- Click Date Issued > Edit cells > Common Transforms > To Date - this will convert all of the dates into a standard [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
-- You can spot-check Date Issued with orig_Date_Issued to make sure everything is correct. Record #36 takes place at 12:47 PM, and you can see that the conversion worked for those cells we edited.
-
-### Geocoding
-This dataset has the locations of each traffic stop in it, but for many mapping platforms, knowing the street address isn't enough. Luckily, OpenRefine can use Geolocation APIs to find a latitude and longitude for addresses - even if they're just cross-street descriptions like the ones most commonly used in this dataset.
-
-#### Quick Workshop Version
-
-*We'll do a small subset of these traffic stops using Google Maps, which doesn't require a user key to access the geocoder. The downsides of using Google Maps are that they do not allow the data to be used in platforms besides Google Maps, and that they have a limit of 2,500 requests per day. This process is taken from the [OpenRefine Wiki](https://github.com/OpenRefine/OpenRefine/wiki/Geocoding), which also includes instructions on using the Google API in batches to complete an entire datset*
-
-Since there's a limit of 2,500 requests per day and the API takes a bit of time, we'll filter out just two rows to gather latitude and longitude.
-
-- Click Commercial Vehicle > Facet > Text Facet
-- Click 'True' to only show the 2 rows that were related to traffic accidents
-- Click Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `"http://maps.google.com/maps/api/geocode/json?sensor=false&address=" + escape(value, "url")`
-- Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
-- The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
-- Click geocodingResponse > Edit Column > Add Column based on this column
-- Enter `with(value.parseJson().results[0].geometry.location, pair, pair.lat +", " + pair.lng)` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
-- You can delete the 'geocodingResponse' column after you have already extracted the lat/lng coordinates.
-
-#### Full Development 
-*Note: this will take an hour or two to process fully, so it's a good idea to set it up to run overnight*
-
-- Get a MapQuest API Key from the [MapQuest Developer Site](https://developer.mapquest.com/) - click the 'Get your Free API Key' button on the front page and fill out the information.
-- Once you have an API key, Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `'http://open.mapquestapi.com/nominatim/v1/search.php?' + 'key=*YOUR KEY*&' + 'format=json&' + 'q=' + escape(value, 'url')` **Note: be sure to add your own API key in the above expression where it says `*YOUR KEY*`**
-- Name the column 'geocodingResponse' and click OK. This will take quite some time to finish.
-- The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
-- Click geocodingResponse > Edit Column > Add Column based on this column
-- Enter `with(value.parseJson().resourceSets[0].resources[0].point.coordinates, pair, pair[0] +", " + pair[1])` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
-- You should see that the resulting column has the lattitude and longitude for the address or cross streets.
-
-### Correcting Typos and Merging Groups
-One of the most tedious parts of data cleaning is finding the typos and mistakes in the data, and similarly, finding multiple terms that are essentially the same or are intended to be the same, and merging them together.
-
-One good way to find typos or categories you can collapse is by doing text facets that show you the composition of the column. *You can find more information about the clustering algorithms in the [OpenRefine wiki](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).*
-
-- Click on City > Facet > Text Facet. You should see a number of terms that can probably be collapsed and altered, such as Burlignton > Burlington, Burlington VT > Burlington, and Essex Junction > Essex Jct.
-- Click on the `x` to close the City facet.
-- Click on City > Edit Cells > Cluster and edit...
-- The first one uses the Key Collision method. Here you should be able to correct S Burlington & S. Burlington into one. Check the 'Merge?' checkbox, then click on 'Merge Selected & Re-Cluster.'
-- Change the method to 'nearest neighbor', and then set the Radius at 3.0. We'll grow this progressively higher to cast a wider net.
-- There are a number of different ways people have entered S/So/South Burlington, lets take all of those and change them to 'South Burlington'. Type in the new cell value in the right, and check the boxes that look like they should be South Burlington. Be careful not to re-cluster the South Burlingtons with Burlington. 
-- Work through a few rounds of this, increasing the Radius and correcting the cells that appear to be incorrect. (Tip - there are several that have 05401 in them - they're likely referring to Burlington proper by its zip code.)
-- Clustering is really helpful, but doesn't always solve every problem. Close the cluster screen, and go back to Text Facets.
-- There are still a few incorrect versions of Burlington left. You can hover over all of the Facets and click on 'edit' on the right to edit all instances of the cluster.
-- Close the 'City' Text Facet and open up a Text Facet on the 'Race' column.
-- Here we can see a few entries (B=Black, W=White) that didn't follow the standard input. We can edit them here in the Facet. You may also want to enter 'Null' in place of the blank ones, or change blank to 'Unknown'.
 
 ### Saving and Exporting
 In the top right corner, you can click on 'Export' and save the data in a number of different formats, including csv and HTML tables.
