@@ -25,10 +25,10 @@ This tutorial will provide instruction on normalizing, correcting, and restructu
 ### Loading the Dataset
 
 - The original [Burlington, VT Traffic Stop Dataset](https://www.burlingtonvt.gov/Police/Data/RawData) is available through the Burlington Police Transparency Portal.
-- Open OpenRefine - it should open a window in your default web browser (if it's already open, you can click 'Open' at the top to start a new project)
+- Open OpenRefine - it should open a window in your default web browser
 - Click 'Browse' and locate the Burlington CSV on your hard drive. Then click 'Next.'
 - The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
-- Click 'Create Project' in the top right corner.
+- Name the project "Burlington_Traffic_Stops_2016" and click 'Create Project' in the top right corner.
 
 ### Evaluation
 
@@ -42,7 +42,7 @@ OpenRefine has some fairly simple built-in functionality that will help us conve
 
 This tool won't work on any times that are 12:xx PM, so we'll need to make a quick change on the 170 rows that fall in the noon hour.
 
-- It's always good to make a backup before we start changing things. Click on the triangle next to Date Issued, then hover over Edit Column, then select Add column based on column@@
+- It's always good to make a backup before we start changing things. Click on the triangle next to Date Issued, then hover over Edit Column, then select Add column based on column
 - The GREL (General Refine Expression Language) window allows you to make some alterations to the original column values. For now, we just want to copy it so we'll leave it as-is. Leave `value` in the GREL window and change the name to 'orig_Date_Issued' and hit OK
 - Click Date Issued > Text filter
 - Enter 'PM' to filter out all but the 3,278 records issued in the PM
@@ -68,7 +68,7 @@ Since there's a limit of 2,500 requests per day and the API takes a bit of time,
 - The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
 - Click geocodingResponse > Edit Column > Add Column based on this column
 - Enter `with(value.parseJson().results[0].geometry.location, pair, pair.lat +", " + pair.lng)` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
-- You can delete the 'geocodingResponse' column after you have already extracted the lat/lng coordinates.
+- You can delete the 'geocodingResponse' column (Edit Column > Remove This Column) after you have already extracted the lat/lng coordinates.
 
 #### Full Development 
 *Note: this will take an hour or two to process fully, so it's a good idea to set it up to run overnight*
@@ -108,7 +108,7 @@ You may also want to export the entire project. This is useful if you want to sh
 ### Loading the Dataset
 
 - The original [Lansing, MI Traffic Stop Dataset](https://data-lansing.opendata.arcgis.com/datasets/986d9c96ee03442f85c540f0e4a494b1_0) is available through the Lansing Open Data portal.
-- Open OpenRefine - it should open a window in your default web browser
+- Open OpenRefine - it should open a window in your default web browser (if it's already open, you can click 'Open' at the top to start a new project)
 - OpenRefine allows you to upload data from a number of places; by default you can upload data from your computer
 - Click 'Browse' and locate the Lansing CSV on your hard drive. Then click 'Next.'
 - The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
