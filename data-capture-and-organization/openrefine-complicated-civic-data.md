@@ -79,7 +79,7 @@ Since there's a limit of 2,500 requests per day and the API takes a bit of time,
 
 - Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
 
-![geocoding in progress](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/burlington5-googlegeocode.png "Geocoding via the Google Maps API will take a few moments")
+![geocoding in progress](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/burlington6-geocodingprocess.png "Geocoding via the Google Maps API will take a few moments")
 
 - The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
 - Click geocodingResponse > Edit Column > Add Column based on this column
@@ -193,15 +193,13 @@ The 'Time' column includes the incorrect date and the correct time, with a T in-
 - Click on Time > Edit Column > Split Column into Several Columns
 - Type `T` in the separator field, then click ok. You now have Time 1, which is just the date, and Time 2, which is just the time.
 
-![time column divded into two colmumns - a date and a time](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/lansingsplitdatetime.png "Two 'Time' columns: one with the incorrect date, and one with the correct time")
+![time column divded into two colmumns - a date and a time](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/lansing5-splitdatetime.png "Two 'Time' columns: one with the incorrect date, and one with the correct time")
 
 - Go ahead and delete Time 1 (Time 1 > Edit column > Remove this column)
 
 ### Append Correct Date with Time
 - Click Date > Edit column > Add column based on this column.
 - Type in `cells["Date"].value + "T" + cells["Time 2"].value` and name it "DateTime"
-
-![project creation screen](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/lansing.png "Creating a Project")
 
 - You should now have the dates in ISO 8601 format, but since it's still on a 12 hr clock, many of the times are incorrect.
 
