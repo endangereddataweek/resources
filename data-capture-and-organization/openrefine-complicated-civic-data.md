@@ -79,7 +79,7 @@ Since there's a limit of 2,500 requests per day and the API takes a bit of time,
 
 - Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
 
-![geocoding in progress](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/burlington6-geocodingprocess.png "Geocoding via the Google Maps API will take a few moments")
+![geocoding in progress](https://github.com/endangereddataweek/resources/blob/master/data-capture-and-organization/img/burlington6-geocodeinprocess.png "Geocoding via the Google Maps API will take a few moments")
 
 - The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
 - Click geocodingResponse > Edit Column > Add Column based on this column
