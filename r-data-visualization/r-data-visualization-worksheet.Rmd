@@ -1,0 +1,202 @@
+---
+title: "Introduction to ggplot2"
+author: "Jason A. Heppler"
+---
+
+## Aim of this worksheet
+
+After completing the worksheet you should have a grasp of [ggplot2](http://ggplot2.org/) library for making plots using the grammar of graphics. You will find the [ggplot2](http://ggplot2.org/) documentation and [R Graph Catalog](http://shiny.stat.ubc.ca/r-graph-catalog/) helpful.
+
+You are free to attempt working through this worksheet with your own data, but we encourage you for now to use the sample datasets contained in the packages below.[^1] 
+
+## Sample datasets
+
+Let's load the packages and sample data now.
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse) # for tidy data
+library(gapminder) # global data on life expectancy, GDP per capita, and population by country
+library(historydata) # datasets for historians
+data("gapminder")
+data("us_state_populations")
+
+## some subsets of data we'll try working with
+california_population <- us_state_populations %>% 
+  filter(state == "California")
+
+western_state_populations <- us_state_populations %>% 
+  filter(state %in% c("Arizona", "California", "Colorado", "Idaho",
+                      "Montana", "Nevada", "New Mexico", "Oregon",
+                      "Utah", "Washington",  "Wyoming"))
+```
+
+## Basics of ggplot2
+
+The grammar of graphics says that variables in our data can be mapped to aesthetics in a visualization. Variables, in the case of R, refer to a column in a data frame. The aesthetic in `ggplot2` takes many forms including `x` and `y` position, `size`, `color`, `fill`, `shape`, and so on. `ggplot2` lets us set which variables are mapped onto which glyphs using the `aes()` function.
+
+`ggplot2` expects three main parts:
+
+1. Mapping a dataset to a `ggplot` object by passing the dataset to `ggplot()` as the first argument.
+2. The variables mapped to aesthetics, using the `aes()` function. Often, `aes()` is passed as the second argument but can also be applied to specific geoms. More on that shortly.
+3. At least one glyph specified by one of the geoms.
+
+Let's make a basic plot. We should first look at our data and understand what it is we're working with and what we'd like to create. 
+
+```{r}
+california_population
+```
+
+Now, let's create a barchart.
+
+```{r, fig.height = 6, fig.align = 'center', message = F, warning = F}
+ggplot(california_population, aes(x = year, y = population)) +
+  geom_bar(stat="identity")
+```
+
+(@) What are the three parts of the plot above?
+
+> 
+
+(@) What is the relationship between each row in the dataset and each glyph in the plot?
+
+> 
+
+(@) Modify the plot so that population appear on the x-axis and year on the y-axis.
+
+```{r}
+
+```
+
+We can specify more than two variables and aesthetics if we wish. Let's switch over to the `western_state_populations` dataset and map the state (notice: a categorical variable) to color.
+
+```{r}
+ggplot(western_state_populations, aes(x = year, y = population, fill = state)) +
+  geom_bar(stat = "identity") +
+  # you should always have a legend, but for readability purposes
+  # we will hide it for now
+  theme(legend.position = "none")
+```
+
+Aesthetic properties can go in the `ggplot()` call if they affect the entire plot (for example, applying color applies color to points, text, and so on), or called for a specific layer (e.g., one of the `geom` functions) if it affects only that layer.
+
+If you're working with scatterplots, we can improve the readability of our chart by changing the [shape of the points](http://www.cookbook-r.com/Graphs/Shapes_and_line_types/) and adjusting their transparency. Let's take a look at the `gapminder` data.
+
+```{r}
+ggplot(gapminder, aes(x = lifeExp, y = gdpPercap, color = continent)) +
+  geom_point(alpha = 0.5, shape = 1)
+```
+
+(@) Make a different plot from any of the above using different variables. Try using the `x`, `y`, and `size` properties, particularly with the `gapminder` data.
+
+```{r}
+
+```
+
+## geoms in ggplot2
+
+We have looked at the `geom_point()` and `geom_bar()` geoms right now for creating glyphs in the plot. Let's look at a few other options for creating our visualizations. Be aware that not every variable in your data is suited well to a particular glyph. You will occassionally have to aggregate your data to create more meaning from your variables.
+
+### geom_histogram()
+
+A [histogram](https://en.wikipedia.org/wiki/Histogram) illustrates the distribution of values in a dataset by binning the data. A single bar is drawn for each bin in the data. For example, we can plot the life expectancy across the range of `gapminder` data. 
+
+```{r, fig.height = 6, fig.align = 'center', message = F, warning = F}
+ggplot(gapminder, aes(x = lifeExp)) +
+  geom_histogram()
+```
+
+(@) Create a histogram of the GDP.
+
+```{r}
+
+```
+
+(@) Can you change the number of bins? (Hint: try `bins =` or `binwidth =`. See `?geom_histogram`.) 
+
+```{r}
+
+```
+
+(@) What happens if you change `x = lifeExp` to `x = continent`? What does the console tell you, and why do you think this is?
+
+### geom_line()
+
+Line graphs are great for illustrating trends in data. Let's look at population growth in California using the `california_population` dataset.
+
+```{r}
+california_population
+```
+
+```{r}
+ggplot(california_population, aes(x = year, y = population)) +
+  geom_line()
+```
+
+(@) Going back to the `gapminder` data, can you create a line chart with a line for the life expectancy and a line for the GDP? (Hint: you will need two calls to `geom_line()`. And instead of specifying the `y` value in the call to `ggplot()` you will do it in the functons for each layer. For instance: `geom_line(aes(y = lifeExp))`.)
+
+```{r}
+
+```
+
+### geom_bar()
+
+Bar plots are similarly created as line plots if specifying `stat = "identity"`, which tells `ggplot` to use the `y` value present in the data rather than count the data rows. (By default, `geom_bar` applies `stat="count"`.)
+
+```{r}
+ggplot(us_national_population, aes(x = year, y = population)) +
+  geom_bar(stat = "identity")
+```
+
+(@) How would you create a bar chart to visualize all state populations over time with the `us_state_populations` dataset?
+
+```{r}
+
+```
+
+### Faceting
+
+Faceting in the context of `ggplot` means creating what Edward Tufte calls "[small multiples](https://en.wikipedia.org/wiki/Small_multiple)." Faceting means we create a panel for a plot associated with different categories in the data. Turning to the `gapminder` data, we can create separate panels for each continent:
+
+```{r}
+ggplot(gapminder, aes(x = lifeExp, y = gdpPercap)) +
+  geom_point(size = 2, alpha = 0.4) +
+  facet_wrap(~ continent)
+```
+
+(@) Create a plot with facets for each state population with the `western_state_populations` dataset.
+
+```{r}
+
+```
+
+## Create your own plots
+
+There are several dataset available for you to use here. Take a look at `early_colleges`, `naval_promotions`, `quasi_war`, `sarna`, `us_national_population`, or `us_state_populations` (from the historydata package) or `gapminder` (from the gapminder package).
+
+Create three plots below using one or more of the datasets above. The three plots should try and make some kind of observation. For each plot, include no more than three sentences explaining what you think the plot means. You should make the plot as informative as possible: remember Edward Tufte's argument about good graphics. Each plot should be as informative as possible using different geoms and variables as reasonable. 
+
+Take a look at the [R Graph Catalog](http://shiny.stat.ubc.ca/r-graph-catalog/) to find examples of what you can do with ggplot.
+
+(@) Plot 1
+
+```{r}
+
+```
+
+> Explanation of plot 1.
+
+(@) Plot 2
+
+```{r}
+
+```
+
+> Explanation of plot 2.
+
+(@) Plot 3
+
+```{r}
+
+```
+
+> Explanation of plot 3.
