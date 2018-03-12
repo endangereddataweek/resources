@@ -1,7 +1,6 @@
 # Endangered Data Week
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
 
 Hello! 👋 We're thrilled that you are interested in [Endangered Data Week](http://endangereddataweek.org)! The material here are training, workshop, and promotional material for you to host your own events either during the official week (February 27 -- March 2), or anytime you wish to run workshops related to data that is at risk of being lost, repressed, or neglected. 
 
