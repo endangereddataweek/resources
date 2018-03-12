@@ -2,6 +2,20 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+- [Endangered Data Week](#endangered-data-week)
+  - [What is Endangered Data Week?](#what-is-endangered-data-week)
+  - [Getting Started and Contributing](#getting-started-and-contributing)
+  - [Workshops](#workshops)
+  - [Resources for hosting and promoting events](#resources-for-hosting-and-promoting-events)
+    - [Promotional Materials](#promotional-materials)
+    - [Resources for events](#resources-for-events)
+  - [Code of Conduct](#code-of-conduct)
+  - [Open Project Leads](#open-project-leads)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 Hello! 👋 We're thrilled that you are interested in [Endangered Data Week](http://endangereddataweek.org)! The material here are training, workshop, and promotional material for you to host your own events either during the official week (February 27 -- March 2), or anytime you wish to run workshops related to data that is at risk of being lost, repressed, or neglected. 
 
 All of the training material here is provided by the community and you should feel free to reach out to workshop creators, submit your own workshops, submit pull requests to existing workshops, or reach out to the [Open Project Leads](#open-project-leads) with any questions. 
