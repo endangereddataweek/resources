@@ -2,7 +2,7 @@
 
 ![Mozilla Global Sprint](https://assets.mofoprod.net/network/home-%402x.jpg)
 
-Hello! 👋 We're thrilled that you're interested in this year's Global Sprint and are excited that you would like to contribute to [Endangered Data Week](http://endangereddataweek.org)'s curricula! 
+Hello! 👋 We're thrilled that you're interested in this year's Global Sprint to contribute to [Endangered Data Week](http://endangereddataweek.org)'s curricula! 
 
 ## What is the Global Sprint?
 
