@@ -2,7 +2,7 @@
 
 ![Mozilla Global Sprint](https://assets.mofoprod.net/network/home-%402x.jpg)
 
-Hello! 👋 We're thrilled that you're interested in this year's Global Sprint to contribute to [Endangered Data Week](http://endangereddataweek.org)'s curricula! 
+Hello! 👋 We're thrilled that you're interested in this year's Global Sprint to contribute to [Endangered Data Week](http://endangereddataweek.org)'s curricula!
 
 ## What is the Global Sprint?
 
@@ -32,3 +32,4 @@ We are identifying areas where we can use help under [this repository's Issues p
 Any issue labeled `mozsprint` are tasks we're addressing during the Sprint.
 
 **Questions or comments**: please email any of the [Project Leads](README.md)! 
+**Interested in participating or getting updates**: [let us know](https://docs.google.com/forms/d/e/1FAIpQLSeG_MlXhn1SH_3o8LHSYul40dkedk9yWGlqNLpguGV_I6-ESA/viewform?usp=sf_link)!
