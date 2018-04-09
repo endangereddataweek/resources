@@ -13,9 +13,10 @@ Feel free to propose changes to this document in a pull request.
   * [Endangered Data Week](#endangered-data-week)
 
 [How Can I Contribute?](#how-can-i-contribute)
-  * [Reporting Bugs](#reporting-bugs)
+  * [Your First Contribution](#your-first-contribution)
+  * [Submitting Workshop Material](#submitting-workshops)
+  * [Telling Your Data Stories](#telling-your-data-stories)
   * [Suggesting Enhancements](#suggesting-enhancements)
-  * [Your First Code Contribution](#your-first-code-contribution)
   * [Pull Requests](#pull-requests)
 
 ## What should I know before I get started?
@@ -37,42 +38,46 @@ This repository specifically hosts **Endangered Data Week resources**, designed 
 
 ## How Can I Contribute?
 
-### Reporting Bugs
+### Your First Contribution
 
-This section guides you through submitting a bug report for Endangered Data Week. Following these guidelines helps maintainers and the community understand your report :pencil:, reproduce the behavior :computer:, and find related reports :mag_right:.
+Unsure where to begin contributing to Endangered Data Week? You can start by looking through these `beginner` and `help-wanted` issues:
 
-Before creating bug reports, please check [this list](#before-submitting-a-bug-report) as you might find out that you don't need to create one. When you are creating a bug report, please [include as many details as possible](#how-do-i-submit-a-good-bug-report). Fill out [the required template](ISSUE_TEMPLATE.md), the information it asks for helps us resolve issues faster.
+* [Beginner issues][beginner] - issues which should only require a few lines of code or writing.
+* [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
 
-#### Before Submitting A Bug Report
+Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
 
-* **Determine which repository the problem should be reported in (e.g., resources? website?)**.
-* **Perform a [cursory search](https://github.com/issues?q=+is%3Aissue+user%3Aendangered+data+week)** to see if the problem has already been reported. If it has, add a comment to the existing issue instead of opening a new one.
+### Submitting Workshop Material
 
-#### How Do I Submit A (Good) Bug Report?
+We're eager to help people work with data, and eagerly welcome contributions of workshop material that others can reuse and remix. This section guides you through submitting a workshop for Endangered Data Week, with a focus on brand new materials. Please use these guidelines to help the project leads and the community understand your suggestions.
 
-Bugs are tracked as [GitHub issues](https://guides.github.com/features/issues/). After you've determined [which repository](#endangered-data-week) your bug is related to, create an issue on that repository and provide the following information by filling in [the template](ISSUE_TEMPLATE.md).
+#### How Do I Submit A Workshop?
 
-Explain the problem and include additional details to help maintainers reproduce the problem:
+Workshops won't always be tracked as [Github issues](https://guides.github.com/features/issues/), and we're fine with duplicate workshops as long as there's some level of difference between them. To generate new workshop material, you can follow these steps:
 
-* **Use a clear and descriptive title** for the issue to identify the problem.
-* **Describe the exact steps which reproduce the problem** in as many details as possible. For example, start by explaining what you searched for. When listing steps, **don't just say what you did, but explain how you did it**. For example, if you moved the cursor to the end of a line, explain if you used the mouse, or a keyboard shortcut or a command, and if so which one?
-* **Provide specific examples to demonstrate the steps**. Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those examples. If you're providing snippets in the issue, use [Markdown code blocks](https://help.github.com/articles/markdown-basics/#multiple-lines).
-* **Describe the behavior you observed after following the steps** and point out what exactly is the problem with that behavior.
-* **Explain which behavior you expected to see instead and why.**
-* **Include screenshots and animated GIFs** which show you following the described steps and clearly demonstrate the problem. If you use the keyboard while following the steps, **record the GIF with the [Keybinding Resolver](https://github.com/atom/keybinding-resolver) shown**. You can use [this tool](http://www.cockos.com/licecap/) to record GIFs on macOS and Windows, and [this tool](https://github.com/colinkeenan/silentcast) or [this tool](https://github.com/GNOME/byzanz) on Linux.
-* **If the problem wasn't triggered by a specific action**, describe what you were doing before the problem happened and share more information using the guidelines below.
+* **Fork this repository** to your own Github account.
+* **Create a new folder** for your workshop. Following the other naming conventions for workshops by prepending a folder name with `workshop-`. If there's a folder with the same name as your folder, append your last name or institution (for example, `workshop-data-science-uno`).
+* **Place your workshop material in this folder** with some light structuring, including: slides, data, code, images, or other supporting material that might be needed. However, if your slides are already hosted elsewhere (like Google), you can skip this step and move to the next one.
+* **Place a README.md in your folder** that explains: the title of the workshop; a short description of the workshops goals; a general sense of experience levels for those attending the workshop; and a point-of-contact for those involved in creating the workshop. If you're linking to a workshop hosted elsewhere, place a link to the slides/material within this README.
+* **Once your material is ready** send us a [pull request](#pull-request) to notify us that changes need review.
+* **You're done!** If we have questions for you or need more information, we may deny the pull request and ask for more details.
 
-Provide more context by answering these questions:
+### Telling Your Data Stories
 
-* **Can you reproduce the problem?**
-* **Did the problem start happening recently**?
-* **Can you reliably reproduce the issue?** If not, provide details about how often the problem happens and under which conditions it normally happens.
+We want to hear your stories about how data that becomes endangered, threatened, neglected, or lost impacts your work. We're collecting your data stories, which are written contributions that can be as short as a couple sentences or as long as a couple pages. If you have a data story to share (or several!), here's how to do it:
 
-Include details about your configuration and environment:
+* **Fork this repository** to your own Github account.
+* **Find the `data-stories` repository** in this repo. Inside should be a collection of individual Markdown files.
+* **Create a new Markdown file** either in [Github's interface](https://help.github.com/articles/about-writing-and-formatting-on-github/) or on your own machine. 
+* **Write your data story** in this new file. Your text here can be as long or as short as you'd like. And remember to sign it by placing your name (and institution, if you'd like) at the bottom of the file. Please sign your document this way:
 
-* **Which browser are you using?**
-* **What's the name and version of the OS you're using**?
-* **Which keyboard layout are you using?** Are you using a US layout or some other layout?
+> lastName: Heppler
+> displayName: Jason Heppler
+> institution: University of Nebraska
+> url: https://example.com/edw
+
+* **Save the document** and send us a [pull request](#pull-request) with `Data Stories` in the submission title.
+* **You're done!** We'll review the pull request once we recieve it, and get back to you with any questions we might have.
 
 ### Suggesting Enhancements
 
@@ -95,15 +100,6 @@ Enhancement suggestions are tracked as [GitHub issues](https://guides.github.com
 * **Describe the current behavior** and **explain which behavior you expected to see instead** and why.
 * **Explain why this enhancement would be useful** to Endangered Data Week.
 * **List some other events or applications where this enhancement exists.**
-
-### Your First Contribution
-
-Unsure where to begin contributing to Endangered Data Week? You can start by looking through these `beginner` and `help-wanted` issues:
-
-* [Beginner issues][beginner] - issues which should only require a few lines of code, and a test or two.
-* [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
-
-Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
 
 ### Pull Requests
 
