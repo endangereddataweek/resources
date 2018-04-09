@@ -59,6 +59,7 @@ Workshops won't always be tracked as [Github issues](https://guides.github.com/f
 * **Create a new folder** for your workshop. Following the other naming conventions for workshops by prepending a folder name with `workshop-`. If there's a folder with the same name as your folder, append your last name or institution (for example, `workshop-data-science-uno`).
 * **Place your workshop material in this folder** with some light structuring, including: slides, data, code, images, or other supporting material that might be needed. However, if your slides are already hosted elsewhere (like Google), you can skip this step and move to the next one.
 * **Place a README.md in your folder** that explains: the title of the workshop; a short description of the workshops goals; a general sense of experience levels for those attending the workshop; and a point-of-contact for those involved in creating the workshop. If you're linking to a workshop hosted elsewhere, place a link to the slides/material within this README.
+* **Update the README.md** in the top-level directory. Find the section called *Workshops* and provide a title, name, license, and link to your workshop within the repository so others can find your material easily.
 * **Once your material is ready** send us a [pull request](#pull-request) to notify us that changes need review.
 * **You're done!** If we have questions for you or need more information, we may deny the pull request and ask for more details.
 
