@@ -24,7 +24,11 @@ This year, Endangered Data Week is part of [Mozilla's Global Sprint](https://moz
 
 ## What is Endangered Data Week?
 
-[Endangered Data Week](http://endangereddataweek.org) is an annual, collaborative effort, coordinated across campuses, nonprofits, libraries, citizen science initiatives, and cultural heritage institutions, to shed light on public datasets that are in danger of being deleted, repressed, mishandled, or lost. The week's events promote care for threatened data by: 
+In the wake of the 2016 US presidential election, librarians, civic hackers, technologists, cultural heritage institutions, journalists, and citizen scientists grew increasingly concerned that government data--particularly data related to topics like climate change, gerrymandering and redlining, and other politically charged subjects--might be threatened through censorship or neglect. Initiatives have sprung up throughout the country, spearheaded by groups like [DataRefuge](https://www.datarefuge.org/), the [Environmental Data & Governance Initiative](https://envirodatagov.org/) (EDGI), and the [End of Term Web Archive](http://eotarchive.cdlib.org/), that attempted to collect, secure, and document government data. The vulnerability of these data underscored the need for quick action on the one hand, and sustained attention to the mechanisms that support (or fail to support) preservation and access to government data, information, and records on the other.
+
+[Endangered Data Week](http://endangereddataweek.org) (EDW) is an annual, collaborative effort, coordinated across campuses, nonprofits, libraries, citizen science initiatives, and cultural heritage institutions, to shed light on public datasets that are in danger of being deleted, repressed, mishandled, or lost. EDW, supported by the [Digital Library Federation](https://www.diglib.org/) (DLF), fosters public conversations about data and encourages the development of reusable curricula for engaging technologists, scholars, librarians, archivists, faculty, students, journalists, nonprofits, and citizens on questions relating to the acquisition, manipulation, visualization, use, and politics of public data. 
+
+The project, however, exists beyond the week itself. This repository is a collection of curricular material, resources, promotional material, and stories that help promote care for threatened data by: 
 
 *   publicizing the availability of datasets
 *   increasing critical engagement with them, including through visualization and analysis
@@ -51,7 +55,6 @@ We are an open source project. Want to help contribute? Are there issues, topics
 
 ### Resources for events
 
-(in development)
 - [Workshop using endangered data](https://github.com/endangereddataweek/resources/blob/master/endangereddataworkshop.md)
 - [DataRescue event](http://www.ppehlab.org/datarescue)
 - [Letter writing/advocacy campaign](https://github.com/endangereddataweek/resources/blob/master/advocacy.md)
