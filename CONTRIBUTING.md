@@ -71,9 +71,9 @@ We want to hear your stories about how data that becomes endangered, threatened,
 * **Create a new Markdown file** either in [Github's interface](https://help.github.com/articles/about-writing-and-formatting-on-github/) or on your own machine. 
 * **Write your data story** in this new file. Your text here can be as long or as short as you'd like. And remember to sign it by placing your name (and institution, if you'd like) at the bottom of the file. Please sign your document this way:
 
-> lastName: Heppler
-> displayName: Jason Heppler
-> institution: University of Nebraska
+> lastName: Heppler  
+> displayName: Jason Heppler  
+> institution: University of Nebraska  
 > url: https://example.com/edw
 
 * **Save the document** and send us a [pull request](#pull-request) with `Data Stories` in the submission title.
