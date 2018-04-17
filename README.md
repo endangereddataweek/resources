@@ -40,8 +40,8 @@ We are an open source project. Want to help contribute? Are there issues, topics
 
 ## Workshops
 
-* [Data Manipulation with R](https://github.com/endangereddataweek/resources/tree/master/data-manipulation-r) by Jason Heppler - CC-BY
-* [Web Scraping with R](https://github.com/endangereddataweek/resources/tree/master/web-scraping-r) by Jason Heppler - CC-BY
+* [Data Manipulation with R](https://github.com/endangereddataweek/resources/tree/master/r-data-manipulation) by Jason Heppler - CC-BY
+* [Web Scraping with R](https://github.com/endangereddataweek/resources/tree/master/r-web-scraping) by Jason Heppler - CC-BY
 * [OpenRefine for Complicated Civic Data](https://github.com/endangereddataweek/resources/tree/master/openrefine-for-complicated-civic-data) by Brandon Locke - CC-BY
 * [Collect & Prep Your Data for Visualization and Analysis](https://github.com/endangereddataweek/resources/tree/master/data-prep) by Anna Kijas and Sarah Melton - CC-BY
 
