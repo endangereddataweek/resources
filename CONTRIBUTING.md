@@ -21,12 +21,16 @@ Feel free to propose changes to this document in a pull request.
 
 ## What should I know before I get started?
 
+### First steps
+
+Connect with us on [the Endangered Data Week Etherpad](https://public.etherpad-mozilla.org/p/endangereddataweek)! We'll be using the Etherpad for the 2018 Mozilla Global Sprint, and there will be information there about additional ways to contribute, check in with us, or otherwise participate.
+
 ### Code of Conduct
 
 This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code.
 
-Please report unacceptable behavior to [blocke@msu.edu](blocke@msu.edu) and/or [jason@jasonheppler.org](mailto:jason@jasonheppler.org).
+Please report unacceptable behavior to the [project leads](README.md#open-project-leads). [blocke@msu.edu](blocke@msu.edu) and/or [jason@jasonheppler.org](mailto:jason@jasonheppler.org).
 
 ### Endangered Data Week
 
@@ -42,10 +46,8 @@ This repository specifically hosts **Endangered Data Week resources**, designed 
 
 Unsure where to begin contributing to Endangered Data Week? You can start by looking through these `beginner` and `help-wanted` issues:
 
-* [Beginner issues][beginner] - issues which should only require a few lines of code or writing.
-* [Help wanted issues][help-wanted] - issues which should be a bit more involved than `beginner` issues.
-
-Both issue lists are sorted by total number of comments. While not perfect, number of comments is a reasonable proxy for impact a given change will have.
+* Beginner issues `beginner` - issues which should only require a few lines of code or writing.
+* Help wanted issues `help-wanted` - issues which should be a bit more involved than `beginner` issues.
 
 ### Submitting Workshop Material
 
@@ -68,23 +70,23 @@ Workshops won't always be tracked as [Github issues](https://guides.github.com/f
 We want to hear your stories about how data that becomes endangered, threatened, neglected, or lost impacts your work. We're collecting your data stories, which are written contributions that can be as short as a couple sentences or as long as a couple pages. If you have a data story to share (or several!), here's how to do it:
 
 * **Fork this repository** to your own Github account.
-* **Find the `data-stories` repository** in this repo. Inside should be a collection of individual Markdown files.
+* **Find the `data-stories` repository** in this repo. Inside should be a collection of individual Markdown files. You should feel free to use any of these files as a template.
 * **Create a new Markdown file** either in [Github's interface](https://help.github.com/articles/about-writing-and-formatting-on-github/) or on your own machine. 
 * **Write your data story** in this new file. Your text here can be as long or as short as you'd like. And remember to sign it by placing your name (and institution, if you'd like) at the *top* of the file. Please sign your document this way:
 
 > lastName: Heppler  
 > displayName: Jason Heppler  
 > institution: University of Nebraska  
-> url: https://example.com/edw
+> url: https://jasonheppler.org
 
 * **Save the document** and send us a [pull request](#pull-request) with `Data Stories` in the submission title.
 * **You're done!** We'll review the pull request once we recieve it, and get back to you with any questions we might have.
 
 ### Suggesting Enhancements
 
-This section guides you through submitting an enhancement suggestion for Endangered Data Week, including completely new features and minor improvements to existing functionality. Following these guidelines helps maintainers and the community understand your suggestion :pencil: and find related suggestions :mag_right:.
+This section guides you through submitting an enhancement suggestion for Endangered Data Week, including completely new contributions and minor improvements to existing workshops, the website, promotional material, or resources. Following these guidelines helps the project leads and the community understand your suggestion :pencil: and find related suggestions :mag_right:.
 
-Before creating enhancement suggestions, please check [this list](#before-submitting-an-enhancement-suggestion) as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](ISSUE_TEMPLATE.md), including the steps that you imagine you would take if the feature you're requesting existed.
+Before creating enhancement suggestions, please check [this list](#before-submitting-an-enhancement-suggestion) as you might find out that you don't need to create one. When you are creating an enhancement suggestion, please [include as many details as possible](#how-do-i-submit-a-good-enhancement-suggestion). Fill in [the template](ISSUE_TEMPLATE.md), including the steps that you imagine you would take if the suggestion you're requesting existed.
 
 #### Before Submitting An Enhancement Suggestion
 
