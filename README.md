@@ -1,5 +1,7 @@
 # Endangered Data Week
 
+[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
+
 [![Contributions Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -16,9 +18,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-Hello! 👋 We're thrilled that you are interested in [Endangered Data Week](http://endangereddataweek.org)! The material here are training, workshop, and promotional material for you to host your own events either during the official week (February 27—March 2, 2018), or anytime you wish to run workshops related to data that is at risk of being lost, repressed, or neglected. 
+Hello! 👋 We're thrilled that you are interested in [Endangered Data Week](http://endangereddataweek.org)! The material here are training, workshop, and promotional material for you to host your own events either during the official week (February 27—March 2, 2018), or anytime you wish to run workshops related to data that is at risk of being lost, repressed, or neglected.
 
-All of the training material here is provided by the community and you should feel free to reach out to workshop creators, submit your own workshops, submit pull requests to existing workshops, or reach out to the [Open Project Leads](#open-project-leads) with any questions. 
+All of the training material here is provided by the community and you should feel free to reach out to workshop creators, submit your own workshops, submit pull requests to existing workshops, or reach out to the [Open Project Leads](#open-project-leads) with any questions.
 
 This year, Endangered Data Week is part of [Mozilla's Global Sprint](https://mozilla.github.io/global-sprint/)! Come join us for all or part of two days, May 10-11, 2018, from 9am-5pm.
 
@@ -26,9 +28,9 @@ This year, Endangered Data Week is part of [Mozilla's Global Sprint](https://moz
 
 In the wake of the 2016 US presidential election, librarians, civic hackers, technologists, cultural heritage institutions, journalists, and citizen scientists grew increasingly concerned that government data—particularly data related to topics like climate change, gerrymandering and redlining, and other politically charged subjects—might be threatened through censorship or neglect. Initiatives have sprung up throughout the country, spearheaded by groups like [DataRefuge](https://www.datarefuge.org/), the [Environmental Data & Governance Initiative](https://envirodatagov.org/) (EDGI), and the [End of Term Web Archive](http://eotarchive.cdlib.org/), that attempted to collect, secure, and document government data. The vulnerability of these data underscored the need for quick action on the one hand, and sustained attention to the mechanisms that support (or fail to support) preservation and access to government data, information, and records on the other.
 
-[Endangered Data Week](http://endangereddataweek.org) (EDW) is an annual, collaborative effort, coordinated across campuses, nonprofits, libraries, citizen science initiatives, and cultural heritage institutions, to shed light on public datasets that are in danger of being deleted, repressed, mishandled, or lost. EDW, supported by the [Digital Library Federation](https://www.diglib.org/) (DLF), fosters public conversations about data and encourages the development of reusable curricula for engaging technologists, scholars, librarians, archivists, faculty, students, journalists, nonprofits, and citizens on questions relating to the acquisition, manipulation, visualization, use, and politics of public data. 
+[Endangered Data Week](http://endangereddataweek.org) (EDW) is an annual, collaborative effort, coordinated across campuses, nonprofits, libraries, citizen science initiatives, and cultural heritage institutions, to shed light on public datasets that are in danger of being deleted, repressed, mishandled, or lost. EDW, supported by the [Digital Library Federation](https://www.diglib.org/) (DLF), fosters public conversations about data and encourages the development of reusable curricula for engaging technologists, scholars, librarians, archivists, faculty, students, journalists, nonprofits, and citizens on questions relating to the acquisition, manipulation, visualization, use, and politics of public data.
 
-The project, however, exists beyond the week itself. This repository is a collection of curricular material, resources, promotional material, and stories that help promote care for threatened data by: 
+The project, however, exists beyond the week itself. This repository is a collection of curricular material, resources, promotional material, and stories that help promote care for threatened data by:
 
 *   publicizing the availability of datasets
 *   increasing critical engagement with them, including through visualization and analysis
@@ -82,3 +84,20 @@ University of Minnesota
 Sarah Melton  
 Boston College  
 @[WorldCatLady](http://twitter.com/worldcatlady)
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- Contributors START
+Jason_Heppler hepplerj https://jasonheppler.org code doc answers tutorial design prReview
+Brandon_Locke brandontlocke http://brandontlocke.com doc answers example tutorial design prReview
+Sarah_Melton svmelton http://www.sarahvmelton.com/ doc answers prReview
+Rachel_Mattson rachmattson https://rachelmattson.wordpress.com/ doc answers prReview
+Contributors END -->
+<!-- Contributors table START -->
+| <img src="https://avatars.githubusercontent.com/hepplerj?s=100" width="100" alt="Jason Heppler" /><br /><sub>Jason Heppler</sub>](https://jasonheppler.org)<br />[💻](git@github.com:endangereddataweek/resources/commits?author=hepplerj) [📖](git@github.com:endangereddataweek/resources/commits?author=hepplerj) 💁 ✅ 🎨 👀 | <img src="https://avatars.githubusercontent.com/brandontlocke?s=100" width="100" alt="Brandon Locke" /><br /><sub>Brandon Locke</sub>](http://brandontlocke.com)<br />[📖](git@github.com:endangereddataweek/resources/commits?author=brandontlocke) 💁 💡 ✅ 🎨 👀 | <img src="https://avatars.githubusercontent.com/svmelton?s=100" width="100" alt="Sarah Melton" /><br /><sub>Sarah Melton</sub>](http://www.sarahvmelton.com/)<br />[📖](git@github.com:endangereddataweek/resources/commits?author=svmelton) 💁 👀 | <img src="https://avatars.githubusercontent.com/rachmattson?s=100" width="100" alt="Rachel Mattson" /><br /><sub>Rachel Mattson</sub>](https://rachelmattson.wordpress.com/)<br />[📖](git@github.com:endangereddataweek/resources/commits?author=rachmattson) 💁 👀 |
+| :---: | :---: | :---: | :---: |
+<!-- Contributors table END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
