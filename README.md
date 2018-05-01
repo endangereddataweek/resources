@@ -3,14 +3,16 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [Endangered Data Week](#endangered-data-week)
-  - [What is Endangered Data Week?](#what-is-endangered-data-week)
-  - [Getting Started and Contributing](#getting-started-and-contributing)
-  - [Workshops](#workshops)
-  - [Resources for hosting and promoting events](#resources-for-hosting-and-promoting-events)
-    - [Promotional Materials](#promotional-materials)
-    - [Resources for events](#resources-for-events)
-  - [Code of Conduct](#code-of-conduct)
-  - [Open Project Leads](#open-project-leads)
+
+- [What is Endangered Data Week?](#what-is-endangered-data-week)
+- [Getting Started and Contributing](#getting-started-and-contributing)
+- [Workshops](#workshops)
+- [Resources for hosting and promoting events](#resources-for-hosting-and-promoting-events)
+  - [Promotional Materials](#promotional-materials)
+  - [Resources for events](#resources-for-events)
+- [Code of Conduct](#code-of-conduct)
+- [Open Project Leads](#open-project-leads)
+- [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
