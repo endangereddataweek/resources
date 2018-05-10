@@ -14,7 +14,7 @@ No matter your skill or background, there are ways for you to contribute! Bring 
 
 ## I have a spare thirty minutes. How can I help?
 
-We are identifying areas where we can use help under [this repository's Issues page](https://github.com/endangereddataweek/resources/issues). Look for the issues labeled with `beginner friendly` or `help wanted`, which will identify some of those tasks that are more easily tackled. Some tasks might be:
+We are identifying areas where we can use help under [this repository's Issues page](https://github.com/endangereddataweek/resources/issues). Look for the issues labeled with `beginner friendly`, which will identify some of those tasks that are more easily tackled. Some tasks might be:
 
 * **Share your data stories**: Why is publicly available data important to you? What would happen if it disappeared or was neglected?
 * **Brainstorm event ideas and collaborators**: What kinds of events could EDW run that it isn't already running? Who else might we involve in EDW?
@@ -24,10 +24,11 @@ Any issue labeled `mozsprint` are tasks we're addressing during the Sprint.
 
 ## I can contribute during one or both days. How can I help?
 
-We are identifying areas where we can use help under [this repository's Issues page](https://github.com/endangereddataweek/resources/issues).  Look for the issues labeled with `help wanted`, which will identify those tasks that might require more substantial investment in time or skill. Some tasks might be:
+We are identifying areas where we can use help under [this repository's Issues page](https://github.com/endangereddataweek/resources/issues). Look for the issues labeled with `writing`, `review`, or creation-specific labels, which will identify those tasks that might require more substantial investment in time or skill. Some tasks might be:
 
 * **Share your workshop material**: Did you run a workshop? Share your handouts, slide decks, and worksheets with us and let others reuse and remix your content for their own events.
 * **Develop a new workshop**: Have an idea for a workshop but want help developing it? Let's find collaborators and create something new!
+* **Review our documentation or current lessons** to help make them more reusable for others.
 
 Any issue labeled `mozsprint` are tasks we're addressing during the Sprint.
 
