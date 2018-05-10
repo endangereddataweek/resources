@@ -67,7 +67,9 @@ Workshops won't always be tracked as [Github issues](https://guides.github.com/f
 
 ### Telling Your Data Stories
 
-We want to hear your stories about how data that becomes endangered, threatened, neglected, or lost impacts your work. We're collecting your data stories, which are written contributions that can be as short as a couple sentences or as long as a couple pages. If you have a data story to share (or several!), here's how to do it:
+We want to hear your stories about how data that becomes endangered, threatened, neglected, or lost impacts your work. We're collecting your data stories, which are written contributions that can be as short as a couple sentences or as long as a couple pages. You can fill out our [Endangered Data Stories form](https://goo.gl/forms/Ex2FPNJKVdqN218I3) to share stories about your use of open data for research, advocacy, teaching, or business, or talk about the impact of a loss of access to open data.
+
+If you want to add photos, video, or your own formatting, you can also:
 
 * **Fork this repository** to your own Github account.
 * **Find the `data-stories` repository** in this repo. Inside should be a collection of individual Markdown files. You should feel free to use any of these files as a template.
