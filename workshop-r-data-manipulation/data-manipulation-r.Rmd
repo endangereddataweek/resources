@@ -23,40 +23,11 @@ library(tidyverse)
 
 <http://endangereddataweek.org>
 
-<div id="attribution" style="line-height: 1.2em;">
-Jason A. Heppler, PhD<br/>
-<span class="smaller">Digital Engagement Librarian</span> </br>
-<span class="smaller">Assistant Professor of History</span> </br>
-<span class="smaller">jasonheppler.org | @jaheppler</span>
-</div>
-
 ## Overview
 
 - Tidy Data
 - Packages of the Tidyverse
 - Hands-on worksheet
-
-## Accessing RStudio Server
-
-All passwords are `edw2017`.
-
-tbattula
-<http://107.170.21.144/rstudio/>
-
-jriley
-<http://107.170.21.84/rstudio/>
-
-bbryan
-<http://107.170.30.49/rstudio/>
-
-dkelberlau
-<http://107.170.31.212/rstudio/>
-
-yohira
-<http://107.170.21.90/rstudio/>
-
-sali
-<http://107.170.21.142/rstudio/>
 
 ## Three kinds of data
 
@@ -95,21 +66,6 @@ Tidy data permits a grammar of data manipulation as well as a grammar of graphic
 | Massachusetts | 1800   | 8
 | New York      | 1800   | 14
 | Connecticut   | 1800   | 20
-
-## Tidy or not?
-
-```{r, echo=FALSE}
-data("economics")
-data("economics_long")
-economics %>% select(date, pop, unemploy) %>% 
-  head(8)
-```
-
-## Tidy or not?
-
-```{r, echo=FALSE}
-economics_long %>% select(-value01)
-```
 
 ## Tidy or not?
 
@@ -159,8 +115,6 @@ dplyr:
 
 `crime.ny.2005 <- select(crime.ny.2005, Type.of.Crime, Count)`
 
-## Folow along / exercise
+## Follow along / exercise
 
-Open the file `https://goo.gl/fKYLYf`. Paste into RStudio and follow along to practice the grammar of data manipulation.
-
-## Thanks!
+Open the worksheet. Paste into RStudio and follow along to practice the grammar of data manipulation.
