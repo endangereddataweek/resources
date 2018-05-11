@@ -38,7 +38,9 @@ The project, however, exists beyond the week itself. This repository is a collec
 
 We are an open source project. Want to help contribute? Are there issues, topics, or projects you feel Endangered Data Week needs to tackle? Open up an [issue](https://github.com/endangereddataweek/resources/issues). Or, contribute your ideas, resources, and teaching material! To get started, take a look at [CONTRIBUTING.md](https://github.com/endangereddataweek/resources/blob/master/CONTRIBUTING.md).
 
-## Workshops
+## Resources for hosting and promoting events
+
+### Workshops
 
 | Workshop | Creator | Notes |
 | -------- | ------- | ----- |
@@ -49,7 +51,22 @@ We are an open source project. Want to help contribute? Are there issues, topics
 | [OpenRefine for Complicated Civic Data](https://github.com/endangereddataweek/resources/tree/master/workshop-openrefine-for-complicated-civic-data) | Brandon Locke | CC-BY |
 | [Collect & Prep Your Data for Visualization and Analysis](https://github.com/endangereddataweek/resources/tree/master/workshop-data-prep-with-open-refine) | Anna Kijas and Sarah Melton | CC-BY |
 
-## Resources for hosting and promoting events
+### Talks
+
+| Talk | Speaker | Notes |
+| ---- | ------- | ----- |
+| [Brief Introduction to Civic Data](https://github.com/endangereddataweek/resources/tree/master/talk-brief-introduction-to-civic-data) | Brandon Locke | CC-BY |
+| [Environmental Data Activism under the Trump Administration](https://github.com/endangereddataweek/resources/tree/master/talk-environmental-data-activism-under-trump) | Lindsey Dillon | CC-BY |
+| [What is Endangered Data?](https://github.com/endangereddataweek/resources/tree/master/talk-what-is-endangered-data) | Jason Heppler | CC-BY |
+
+### Ideas for Events 
+
+| Resource | Description | 
+| -------- | ----------- |
+| [Data advocacy and letter writing campaigns](https://github.com/endangereddataweek/resources/blob/master/resource-advocacy.md) | Resources on promoting open data policies. |
+| [Data Rescue](https://github.com/endangereddataweek/resources/blob/master/resource-datarescue.md) | Resources related to Data Rescue events. |
+| [Endangered Data Workshop](https://github.com/endangereddataweek/resources/blob/master/resource-endangereddataworkshop.md) | Resources on locating endangered data. |
+| [VPN Crypto resources](https://github.com/endangereddataweek/resources/blob/master/resource-vpn-crypto.md) | Resources for running crypto and VPN evnets. |
 
 ### Promotional Materials
 
@@ -57,12 +74,6 @@ We are an open source project. Want to help contribute? Are there issues, topics
 - [Save the Date postcards](https://github.com/endangereddataweek/resources/tree/master/media/savethedate2018-postcards)
 - [Print your own stickers](https://github.com/endangereddataweek/resources/tree/master/media/logo-stickers)
 - [Make your own buttons](https://github.com/endangereddataweek/resources/blob/master/media/public-data-stories-kit/Endangered%20Data%20week%201.5%20in%20buttons%20012418.pdf)
-
-### Resources for events
-
-- [Workshop using endangered data](https://github.com/endangereddataweek/resources/blob/master/endangereddataworkshop.md)
-- [DataRescue event](http://www.ppehlab.org/datarescue)
-- [Letter writing/advocacy campaign](https://github.com/endangereddataweek/resources/blob/master/advocacy.md)
 - [Postcards to advocate for open data policies](https://github.com/endangereddataweek/resources/tree/master/media/advocacy-postcards)
 
 ## Code of Conduct
