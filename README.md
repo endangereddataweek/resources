@@ -41,7 +41,7 @@ We are an open source project. Want to help contribute? Are there issues, topics
 ## Workshops
 
 | Workshop | Creator | Notes |
-
+| -------- | ------- | ----- |
 | [Data Manipulation with R](https://github.com/endangereddataweek/resources/tree/master/workshop-r-data-manipulation) | Jason Heppler | CC-BY |
 | [Data Visualization with R](https://github.com/endangereddataweek/resources/tree/master/workshop-r-data-visualization) | Jason Heppler | CC-BY |
 | [Introduction to Github](https://github.com/endangereddataweek/resources/tree/master/workshop-introduction-to-github) | Jason Heppler | CC-BY |
