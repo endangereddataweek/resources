@@ -40,10 +40,14 @@ We are an open source project. Want to help contribute? Are there issues, topics
 
 ## Workshops
 
-* [Data Manipulation with R](https://github.com/endangereddataweek/resources/tree/master/r-data-manipulation) by Jason Heppler - CC-BY
-* [Web Scraping with R](https://github.com/endangereddataweek/resources/tree/master/r-web-scraping) by Jason Heppler - CC-BY
-* [OpenRefine for Complicated Civic Data](https://github.com/endangereddataweek/resources/tree/master/openrefine-for-complicated-civic-data) by Brandon Locke - CC-BY
-* [Collect & Prep Your Data for Visualization and Analysis](https://github.com/endangereddataweek/resources/tree/master/data-prep) by Anna Kijas and Sarah Melton - CC-BY
+Workshop | Creator | Notes
+
+[Data Manipulation with R](https://github.com/endangereddataweek/resources/tree/master/workshop-r-data-manipulation) | Jason Heppler | CC-BY
+[Data Visualization with R](https://github.com/endangereddataweek/resources/tree/master/workshop-r-data-visualization) | Jason Heppler | CC-BY
+[Introduction to Github](https://github.com/endangereddataweek/resources/tree/master/workshop-introduction-to-github) | Jason Heppler | CC-BY
+[Web Scraping with R](https://github.com/endangereddataweek/resources/tree/master/workshop-r-web-scraping) | Jason Heppler | CC-BY
+[OpenRefine for Complicated Civic Data](https://github.com/endangereddataweek/resources/tree/master/workshop-openrefine-for-complicated-civic-data) | Brandon Locke | CC-BY
+[Collect & Prep Your Data for Visualization and Analysis](https://github.com/endangereddataweek/resources/tree/master/workshop-data-prep-with-open-refine) | Anna Kijas and Sarah Melton | CC-BY
 
 ## Resources for hosting and promoting events
 
