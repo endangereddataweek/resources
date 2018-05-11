@@ -11,7 +11,7 @@ Both of the following datasets come from the [Police Data Initiative](https://ww
 
 This tutorial will provide instruction on normalizing, correcting, and restructuring two datasets from the initiative using OpenRefine.
 
-[Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/openrefine-workshop-files/lansing-burlington-traffic-stops.zip).
+[Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/lansing-burlington-traffic-stops.zip).
 
 ### OpenRefine
 
@@ -74,7 +74,7 @@ Since there's a limit of 2,500 requests per day and the API takes a bit of time,
 - Click 'True' to only show the 2 rows that were related to traffic accidents
 - Click Location > Edit Column > Add Column by Fetching URLs... and enter this expression: `"http://maps.google.com/maps/api/geocode/json?sensor=false&address=" + escape(value, "url")`
 
-![using the GREL window to access the Google Maps API](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington5-googlegeocode.png "Using the GREL window to access Google Maps API")
+![using the GREL window to access the Google Maps API](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington5-googlegeocode.png "Using the GREL window to access Google Maps API")
 
 - Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
 
