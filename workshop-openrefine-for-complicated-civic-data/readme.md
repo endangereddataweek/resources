@@ -11,7 +11,7 @@ Both of the following datasets come from the [Police Data Initiative](https://ww
 
 This tutorial will provide instruction on normalizing, correcting, and restructuring two datasets from the initiative using OpenRefine.
 
-[Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/openrefine-workshop-files/lansing-burlington-traffic-stops.zip).
+[Both datasets can be downloaded here](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/openrefine-workshop-files/lansing-burlington-traffic-stops.zip).
 
 ### OpenRefine
 
@@ -28,13 +28,13 @@ This tutorial will provide instruction on normalizing, correcting, and restructu
 - Click 'Browse' and locate the Burlington CSV on your hard drive. Then click 'Next.'
 - The Configure Parsing Options screen will ask you to confirm a few things. It has made guesses, based on the data, on the type of file, the character encoding and the character that separates columns. Take a look at the data in the top window and make sure everything looks like it's showing up correctly.
 
-![project creation screen](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington1-createproject.png "Creating a Project")
+![project creation screen](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington1-createproject.png "Creating a Project")
 
 - Name the project "Burlington_Traffic_Stops_2016" and click 'Create Project' in the top right corner.
 
 ### Evaluation
 
-![spreadsheet view of the data](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington2-reviewdata.png "Evaluate the table and try to find data that could be formatted better")
+![spreadsheet view of the data](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington2-reviewdata.png "Evaluate the table and try to find data that could be formatted better")
 
 The 'Date Issued' column seems to be structured regularly, but the format isn't generally recognized as machine-readable, and the times are on a 12-hr clock instead of a 24-hr clock. 
 
@@ -53,13 +53,13 @@ This tool won't work on any times that are 12:xx PM, so we'll need to make a qui
 - Click Date Issued > Edit Cells > Transform
 - Enter `value.replace(" 12:"," 00:")` - this will change all times starting with 12 to 00. The inclusion of the space and colon ensures that no months, minutes, or seconds are impacted. Click OK. This should work on 170 cells.
 
-![using the GREL window to change all 12:xx to 00:xx](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington3-replace12.png "")
+![using the GREL window to change all 12:xx to 00:xx](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington3-replace12.png "")
 
 - On the left side, click 'Remove All' to remove the text filter and bring back both AM and PM rows.
 - Click Date Issued > Edit cells > Common Transforms > To Date - this will convert all of the dates into a standard [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
 - You can spot-check Date Issued with orig_Date_Issued to make sure everything is correct. Record #36 takes place at 12:47 PM, and you can see that the conversion worked for those cells we edited.
 
-![data with correctly formatted dates](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington4-datecheck.png "Corrected, machine-readable dates")
+![data with correctly formatted dates](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington4-datecheck.png "Corrected, machine-readable dates")
 
 ### Geocoding
 This dataset has the locations of each traffic stop in it, but for many mapping platforms, knowing the street address isn't enough. Luckily, OpenRefine can use Geolocation APIs to find a latitude and longitude for addresses - even if they're just cross-street descriptions like the ones most commonly used in this dataset.
@@ -78,12 +78,12 @@ Since there's a limit of 2,500 requests per day and the API takes a bit of time,
 
 - Name the column 'geocodingResponse' and click OK. This will take 20-30 seconds to finish.
 
-![geocoding in progress](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington6-geocodeinprocess.png "Geocoding via the Google Maps API will take a few moments")
+![geocoding in progress](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington6-geocodeinprocess.png "Geocoding via the Google Maps API will take a few moments")
 
 - The new 'geocodingResponse' column won't be very clear or useful - it will be the full JSON response with all of the information Google has about that location.
 - Click geocodingResponse > Edit Column > Add Column based on this column
 
-![using the GREL window to parse the Google Maps API](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington7-parsegeocode.png "You can use GREL to parse the Google Maps API and get only the information you want")
+![using the GREL window to parse the Google Maps API](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington7-parsegeocode.png "You can use GREL to parse the Google Maps API and get only the information you want")
 
 - Enter `with(value.parseJson().results[0].geometry.location, pair, pair.lat +", " + pair.lng)` and call the new column 'latlng.' Hit OK. This will parse the JSON and correctly format the latitute and longitude in the neew column.
 - You can delete the 'geocodingResponse' column (Edit Column > Remove This Column) after you have already extracted the lat/lng coordinates.
@@ -104,14 +104,14 @@ One of the most tedious parts of data cleaning is finding the typos and mistakes
 
 One good way to find typos or categories you can collapse is by doing text facets that show you the composition of the column. *You can find more information about the clustering algorithms in the [OpenRefine wiki](https://github.com/OpenRefine/OpenRefine/wiki/Clustering-In-Depth).*
 
-![all of the city names in the dataset viewed via text facet](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington8-cityfacet.png "Using the Text Facet feature to view all unique City names")
+![all of the city names in the dataset viewed via text facet](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington8-cityfacet.png "Using the Text Facet feature to view all unique City names")
 
 - Click on City > Facet > Text Facet. You should see a number of terms that can probably be collapsed and altered, such as Burlignton > Burlington, Burlington VT > Burlington, and Essex Junction > Essex Jct.
 - Click on the `x` to close the City facet.
 - Click on City > Edit Cells > Cluster and edit...
 - The first one uses the Key Collision method. Here you should be able to correct S Burlington & S. Burlington into one. Check the 'Merge?' checkbox, then click on 'Merge Selected & Re-Cluster.'
 
-![clustering feature to find likely candidates for merging](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/burlington9-citycluster.png "Clustering finds likely candidates for merging")
+![clustering feature to find likely candidates for merging](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/burlington9-citycluster.png "Clustering finds likely candidates for merging")
 
 - Change the method to 'nearest neighbor', and then set the Radius at 3.0. We'll grow this progressively higher to cast a wider net.
 - There are a number of different ways people have entered S/So/South Burlington, lets take all of those and change them to 'South Burlington'. Type in the new cell value in the right, and check the boxes that look like they should be South Burlington. Be careful not to re-cluster the South Burlingtons with Burlington. 
@@ -141,7 +141,7 @@ You may also want to export the entire project. This is useful if you want to sh
 
 Take a look at the data and see what types of questions you can ask of it. You may also notice a few formatting or data issues that raise some flags. At the top of the screen, you can set OpenRefine to show you 50 rows at a time so that you can get a better view.
 
-![spreadsheet view of the data](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing1-reviewdata.png "Evaluate the table and try to find data that could be formatted better")
+![spreadsheet view of the data](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing1-reviewdata.png "Evaluate the table and try to find data that could be formatted better")
 
 The time and date information in this dataset immediately jumps out as a concern. There are three columns that express the time and date — a 'Time' column with date and time formatted in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), an 'AM_PM' column, and a 'Date' column. Even more troubling, the 'Time' and 'Date' columns contradict each other. 
 
@@ -172,11 +172,11 @@ Based on the regular use of YYYY as opposed to YY, we can easily filter these ou
 - Type `201[0-9]` to just select the dates that use four characters. Be sure to also click 'regular expression' so that it's not looking for a literal match
 - Any transformations we make now will only impact these 13 rows that match
 
-![using a regular expression in the text filter](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing2-normalizedates.png "Using a regular expression to find all dates with a four character year")
+![using a regular expression in the text filter](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing2-normalizedates.png "Using a regular expression to find all dates with a four character year")
 
 - Click on Date > Edit Cells > Transform. 
 
-![GREL transformation of date order](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing3-normalizedates2.png "Rearranging the date information using date functions")
+![GREL transformation of date order](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing3-normalizedates2.png "Rearranging the date information using date functions")
 
 - Type `toString(toDate(value),"YY/MM/dd")` This will convert the value from a string format to a date format, rearrange it to the format we want, and then convert it back to a string, so that it matches the rest of our dates. 
 - Click OK to make the changes and return to the data screen
@@ -184,7 +184,7 @@ Based on the regular use of YYYY as opposed to YY, we can easily filter these ou
 - Go back to the 'Date' column, and Transform again. Then type `"20"+value` to make all dates YYYY/MM/dd
 - Let's format the date so that it's a string that matches the ISO 8601 format. Click on the triangle by 'Date,' then 'Transform,' and type `value.replace("/","-")`. This will take all `/`s and replace them with `-`s.
 
-![reviewing the normalized dates](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing4-datescorrected.png "All of the dates are now formatted to YYYY/MM/DD")
+![reviewing the normalized dates](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing4-datescorrected.png "All of the dates are now formatted to YYYY/MM/DD")
 
 ### Separate the Time of the Stop
 The 'Time' column includes the incorrect date and the correct time, with a T in-between.
@@ -192,7 +192,7 @@ The 'Time' column includes the incorrect date and the correct time, with a T in-
 - Click on Time > Edit Column > Split Column into Several Columns
 - Type `T` in the separator field, then click ok. You now have Time 1, which is just the date, and Time 2, which is just the time.
 
-![time column divded into two colmumns - a date and a time](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing5-splitdatetime.png "Two 'Time' columns: one with the incorrect date, and one with the correct time")
+![time column divded into two colmumns - a date and a time](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing5-splitdatetime.png "Two 'Time' columns: one with the incorrect date, and one with the correct time")
 
 - Go ahead and delete Time 1 (Time 1 > Edit column > Remove this column)
 
@@ -211,7 +211,7 @@ To convert all 12:xx to 00:xx:
 
 - Type `value.replace("T12", "T00")`, then click OK.
 
-![GREL screen to replace T12 with T00](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing6-fix12.png "Replacing all 12:xx times with 00:xx")
+![GREL screen to replace T12 with T00](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing6-fix12.png "Replacing all 12:xx times with 00:xx")
 
 Right now, Open Refine sees the 'DateTime' column as a string, not a date. Open Refine has a built-in feature to alter data that it recognizes as dates, but before we do that, we have to make a quick adjustment. We'll need to remove the Z at the end of the time — OpenRefine will adjust the time if the Z is there. (Z is intended to signify that this is UTC - though there's no indication that this is correct - it's much more likely to be in Eastern Standard/Daylight time.)
 
@@ -219,7 +219,7 @@ Right now, Open Refine sees the 'DateTime' column as a string, not a date. Open 
 - Type in `value.replace("Z","")` to replace all instances of 'Z' with nothing. Then click OK
 - Click on DateTime > Edit Cells > Common transforms > To date. This should successfully transform all 6187 rows, and the data should appear green now.
 
-![DateTime column is now green](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing7-timeformatted.png "If a column is recognized as a date format, it will be green")
+![DateTime column is now green](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing7-timeformatted.png "If a column is recognized as a date format, it will be green")
 
 Now that this is fixed, we can filter out the PM dates to work with:
 
@@ -228,13 +228,13 @@ Now that this is fixed, we can filter out the PM dates to work with:
 - Click on DateTime > Edit cells > Transform
 - In the GREL window, type: `value.inc(12,'hours')` This [function](https://github.com/OpenRefine/OpenRefine/wiki/GREL-Date-Functions#incdate-d-number-value-string-unit) will understand properly formatted dates and allow us to add 12 hours to every time.
 
-![GREL window to increase all PM times by 12 hrs](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing8-convertto24hr.png "Converting to a 24 hour clock by adding 12 hours to all PM rows")
+![GREL window to increase all PM times by 12 hrs](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing8-convertto24hr.png "Converting to a 24 hour clock by adding 12 hours to all PM rows")
 
 - Click 'Remove All' to clear the filter
 
 Double-check DateTime against the original times and dates to make sure that we've done this correctly. If so, we can remove 'AM_PM,' 'Time 2,', and 'Date.' 
 
-![converted times alongside original times](https://github.com/endangereddataweek/resources/blob/master/openrefine-for-complicated-civic-data/img/lansing9-finalresults.png "Check the DateTime row against the old time columns")
+![converted times alongside original times](https://github.com/endangereddataweek/resources/blob/master/workshop-openrefine-for-complicated-civic-data/img/lansing9-finalresults.png "Check the DateTime row against the old time columns")
 
 One note: This time is still technically incorrect. These are all in local time, though the use of Z indicates that it's in UTC.
 
