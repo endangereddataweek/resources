@@ -66,7 +66,7 @@ This dataset has the locations of each traffic stop in it, but for many mapping 
 
 #### Quick Workshop Version
 
-*We'll do a small subset of these traffic stops using Google Maps, which doesn't require a user key to access the geocoder. The downsides of using Google Maps are that they do not allow the data to be used in platforms besides Google Maps, and that they have a limit of 2,500 requests per day. This process is taken from the [OpenRefine Wiki](https://github.com/OpenRefine/OpenRefine/wiki/Geocoding), which also includes instructions on using the Google API in batches to complete an entire datset*
+*We'll do a small subset of these traffic stops using Google Maps, which doesn't require a user key to access the geocoder. The downsides of using Google Maps are that they do not allow the data to be used in platforms besides Google Maps, and that they have a limit of 2,500 requests per day. This process is taken from the [OpenRefine Wiki](https://github.com/OpenRefine/OpenRefine/wiki/Geocoding), which also includes instructions on using the Google API in batches to complete an entire datset* **Note: If there are many people on the same IP address, Google Maps may block access fairly quickly.**
 
 Since there's a limit of 2,500 requests per day and the API takes a bit of time, we'll filter out just two rows to gather latitude and longitude.
 
