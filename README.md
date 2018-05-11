@@ -67,7 +67,7 @@ We are an open source project. Want to help contribute? Are there issues, topics
 | [Data advocacy and letter writing campaigns](https://github.com/endangereddataweek/resources/blob/master/resource-advocacy.md) | Resources on promoting open data policies. |
 | [Data Rescue](https://github.com/endangereddataweek/resources/blob/master/resource-datarescue.md) | Resources related to Data Rescue events. |
 | [Endangered Data Workshop](https://github.com/endangereddataweek/resources/blob/master/resource-endangereddataworkshop.md) | Resources on locating endangered data. |
-| [VPN Crypto resources](https://github.com/endangereddataweek/resources/blob/master/resource-vpn-crypto.md) | Resources for running crypto and VPN evnets. |
+| [VPN Crypto resources](https://github.com/endangereddataweek/resources/blob/master/resource-vpn-crypto.md) | Resources for running crypto and VPN events. |
 
 ### Promotional Materials
 
