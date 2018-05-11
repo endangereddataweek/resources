@@ -36,7 +36,7 @@ The project, however, exists beyond the week itself. This repository is a collec
 
 ## Getting Started and Contributing
 
-We are an open source project. Want to help contribute? Are there issues, topics, or projects you feel Endangered Data Week needs to tackle? Open up an [issue](https://github.com/endangereddataweek/resources/issues) using the [issue template](https://github.com/endangereddataweek/resources/blob/master/ISSUE_TEMPLATE.md). Or, contribute your ideas, resources, and teaching material! To get started, take a look at [CONTRIBUTING.md](https://github.com/endangereddataweek/resources/blob/master/CONTRIBUTING.md).
+We are an open source project. Want to help contribute? Are there issues, topics, or projects you feel Endangered Data Week needs to tackle? Open up an [issue](https://github.com/endangereddataweek/resources/issues). Or, contribute your ideas, resources, and teaching material! To get started, take a look at [CONTRIBUTING.md](https://github.com/endangereddataweek/resources/blob/master/CONTRIBUTING.md).
 
 ## Workshops
 
