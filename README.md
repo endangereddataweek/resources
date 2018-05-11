@@ -6,10 +6,11 @@
 
 - [What is Endangered Data Week?](#what-is-endangered-data-week)
 - [Getting Started and Contributing](#getting-started-and-contributing)
-- [Workshops](#workshops)
 - [Resources for hosting and promoting events](#resources-for-hosting-and-promoting-events)
+  - [Workshops](#workshops)
+  - [Talks](#talks)
+  - [Ideas for Events](#ideas-for-events)
   - [Promotional Materials](#promotional-materials)
-  - [Resources for events](#resources-for-events)
 - [Code of Conduct](#code-of-conduct)
 - [Open Project Leads](#open-project-leads)
 - [Contributors](#contributors)
