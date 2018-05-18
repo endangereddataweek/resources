@@ -101,7 +101,7 @@ Boston College
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+This project exists thanks to all the people who contribute ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)) [[Contribute](CONTRIBUTING.md)]:
 
 <!-- Contributors START
 Jason_Heppler hepplerj https://jasonheppler.org code doc answers tutorial design prReview
@@ -129,3 +129,15 @@ Contributors END -->
 <!-- Contributors table END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+
+## Sponsors
+
+![DLF](http://endangereddataweek.org/img/DLF-logo.png)
+
+![Mozilla Science Lab](http://endangereddataweek.org/img/mozillascience-logo.png)
+
+![DataRefuge](http://endangereddataweek.org/img/DataRefuge-logo.png)
+
+![NDSA](http://endangereddataweek.org/img/NDSA-logo.png)
+
+![CLIR](http://endangereddataweek.org/img/CLIR-logo.png)
