@@ -136,4 +136,4 @@ This project follows the [all-contributors](https://github.com/kentcdodds/all-co
 ## Sponsors
 
 <img src="http://endangereddataweek.org/img/DLF-logo.png" width="150"
-alt="Digital Library Federation" /> <img src="http://endangereddataweek.org/img/mozillascience-logo.png" width="150" alt="Mozilla Science Lab" /> <img src="http://endangereddataweek.org/img/DataRefuge-logo.png" width="150" alt="Data Refuge" /> <img src="http://endangereddataweek.org/img/NDSA-logo.png" width="150" alt="NDSA" /> <img src="http://endangereddataweek.org/img/CLIR-logo.png" width="150" alt="CLIR" />
+alt="Digital Library Federation" /> <img src="http://endangereddataweek.org/img/CLIR-logo.png" width="80" alt="CLIR" /> <img src="http://endangereddataweek.org/img/mozillascience-logo.png" width="150" alt="Mozilla Science Lab" /> <img src="http://endangereddataweek.org/img/DataRefuge-logo.png" width="150" alt="Data Refuge" /> <img src="http://endangereddataweek.org/img/NDSA-logo.png" width="150" alt="NDSA" />
