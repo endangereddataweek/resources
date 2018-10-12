@@ -1,4 +1,4 @@
-**[View the PDF](https://github.com/endangereddataweek/resources/blob/master/media/postcards/Endangered%20Data%20postcards.pdf)**
+**[View the PDF](https://github.com/endangereddataweek/resources/blob/master/media/advocacy-postcards/endangereddata-postcards.pdf)**
 
 Brief instructions for printing these:
 
