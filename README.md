@@ -17,11 +17,9 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-Hello! 👋 We're thrilled that you are interested in [Endangered Data Week](http://endangereddataweek.org)! The material here are training, workshop, and promotional material for you to host your own events either during the official week (February 27—March 2, 2018), or anytime you wish to run workshops related to data that is at risk of being lost, repressed, or neglected.
+Hello! 👋 We're thrilled that you are interested in [Endangered Data Week](http://endangereddataweek.org)! The material here are training, workshop, and promotional material for you to host your own events either during the official week (February 25—March 1, 2019), or anytime you wish to run workshops related to data that is at risk of being lost, repressed, or neglected.
 
 All of the training material here is provided by the community and you should feel free to reach out to workshop creators, submit your own workshops, submit pull requests to existing workshops, or reach out to the [Open Project Leads](#open-project-leads) with any questions.
-
-This year, Endangered Data Week is part of [Mozilla's Global Sprint](https://mozilla.github.io/global-sprint/)! Come join us for all or part of two days, May 10-11, 2018, from 9am-5pm.
 
 ## What is Endangered Data Week?
 
@@ -89,7 +87,7 @@ University of Nebraska at Omaha
 
 Brandon T. Locke  
 Michigan State University  
-@[brandonlocke](http://twitter.com/brandontlocke)
+@[brandontlocke](http://twitter.com/brandontlocke)
 
 Rachel Mattson  
 University of Minnesota  
