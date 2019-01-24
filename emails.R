@@ -11,7 +11,6 @@ n_occur18 <- data.frame(table(edw2018$`Contact Email`))
 
 # Combine the tables and output a single file with all unique emails
 emails <- bind_rows(n_occur17, n_occur18)
-emails$Freq <- NULL
 emails_final <- emails %>% group_by(Var1) %>% 
   summarise_all(funs(first(na.omit(.))))
 
