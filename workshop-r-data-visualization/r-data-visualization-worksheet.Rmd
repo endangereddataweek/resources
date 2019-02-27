@@ -132,7 +132,7 @@ ggplot(california_population, aes(x = year, y = population)) +
   geom_line()
 ```
 
-(@) Going back to the `gapminder` data, can you create a line chart with a line for the life expectancy and a line for the GDP? (Hint: you will need two calls to `geom_line()`. And instead of specifying the `y` value in the call to `ggplot()` you will do it in the functons for each layer. For instance: `geom_line(aes(y = lifeExp))`.)
+(@) Going to the `western_state_populations` data, can you create a line chart with a line for each state? (Hint: remember your color aesthetics.)
 
 ```{r}
 
