@@ -30,7 +30,7 @@ Connect with us on [the Endangered Data Week Etherpad](https://public.etherpad-m
 This project adheres to the Contributor Covenant [code of conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code.
 
-Please report unacceptable behavior to the [project leads](README.md#open-project-leads). [blocke@msu.edu](blocke@msu.edu) and/or [jason@jasonheppler.org](mailto:jason@jasonheppler.org).
+Please report unacceptable behavior to the [project leads](README.md#open-project-leads). [brandontlocke@gmail.com](mailto:brandontlocke@gmail.com) and/or [jason@jasonheppler.org](mailto:jason@jasonheppler.org).
 
 ### Endangered Data Week
 
