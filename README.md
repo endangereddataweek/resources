@@ -12,7 +12,7 @@
   - [Ideas for Events](#ideas-for-events)
   - [Promotional Materials](#promotional-materials)
 - [Code of Conduct](#code-of-conduct)
-- [Open Project Leads](#open-project-leads)
+- [Project Leads](#project-leads)
 - [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -79,14 +79,13 @@ We are an open source project. Want to help contribute? Are there issues, topics
 
 Endangered Data Week is committed to creating and supporting an inclusive community of practice. Please see our [Code of Conduct](https://github.com/endangereddataweek/resources/blob/master/CODE_OF_CONDUCT.md).
 
-## Open Project Leads
+## Project Leads
 
 Jason A. Heppler  
 University of Nebraska at Omaha  
 @[jaheppler](http://twitter.com/jaheppler)
 
 Brandon T. Locke  
-Michigan State University  
 @[brandontlocke](http://twitter.com/brandontlocke)
 
 Rachel Mattson  
