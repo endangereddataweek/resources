@@ -84,6 +84,18 @@ If you want to add photos, video, or your own formatting, you can also:
 * **Save the document** and send us a [pull request](#pull-request) with `Data Stories` in the submission title.
 * **You're done!** We'll review the pull request once we recieve it, and get back to you with any questions we might have.
 
+### Translate materials
+Right now all of our materials are only available in English, but we would love for these to be accessible to broader populations.
+
+If you'd like to translate:
+
+    Fork the repository
+    Duplicate the file you'd like to translate
+    Add the language at the end of the filename (e.g. data-prep-spanish)
+    Create a pull request
+
+If you're not comfortable with Github, feel free to send a translation to the [open project leads](https://github.com/endangereddataweek/resources#open-project-leads)!
+
 ### Suggesting Enhancements
 
 This section guides you through submitting an enhancement suggestion for Endangered Data Week, including completely new contributions and minor improvements to existing workshops, the website, promotional material, or resources. Following these guidelines helps the project leads and the community understand your suggestion :pencil: and find related suggestions :mag_right:.
